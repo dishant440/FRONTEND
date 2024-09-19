@@ -1,7 +1,7 @@
-import Logo from './Logo'; // Default import
-import Navbar from './Navbar'; // Assuming Navbar is a named export
-import User from './User'; // Assuming User is a named export
+import Logo from './Logo'; 
+import Navbar from './Navbar'; 
+import User from './User'; 
+import Input from './Input';
+import Button from "./Button"
 
-
-
-export {Logo, Navbar, User};
+export {Logo, Navbar, User, Input, Button};
