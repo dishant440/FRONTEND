@@ -13,11 +13,12 @@ const Signin = () => {
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const navigate = useNavigate();
-    const login = useAuth();
+    const {login} = useAuth();
 
-    async function handleSubmit(e){
+    async function handleSubmit(e) {
       e.preventDefault();
       const toastId = toast.loading("Signing in...");
+    
       if (!email || !password) {
         toast.update(toastId, {
           render: "Fields are required",
@@ -25,25 +26,31 @@ const Signin = () => {
           isLoading: false,
           autoClose: 2000,
         });
-      }      
+        return;
+      }
+    
       try {
-        const response = await axios.post("http://localhost:7000/api/login",{
+        const response = await axios.post("http://localhost:7000/api/login", {
           email,
           password
         });
+        
+
+    
         localStorage.setItem("token", response.data.token);
-        axios.defaults.headers.common[
-        "Authorization"
-        ] = `Bearer ${response.data.token}`;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.token}`;
+  
         toast.update(toastId, {
           render: "Signin successful!",
           type: "success",
           isLoading: false,
           autoClose: 2000,
         });
-        login();
+    
+        login(); 
         navigate("/");
       } catch (error) {
+      
         toast.update(toastId, {
           render: error.response?.data?.message || "Error during SIGN IN",
           type: "error",
@@ -51,8 +58,8 @@ const Signin = () => {
           autoClose: 2000,
         });
       }
-
     }
+    
 
     return(
        <>
