@@ -18,6 +18,14 @@ const Signin = () => {
     async function handleSubmit(e){
       e.preventDefault();
       const toastId = toast.loading("Signing in...");
+      if (!email || !password) {
+        toast.update(toastId, {
+          render: "Fields are required",
+          type: "error",
+          isLoading: false,
+          autoClose: 2000,
+        });
+      }      
       try {
         const response = await axios.post("http://localhost:7000/api/login",{
           email,
@@ -37,7 +45,7 @@ const Signin = () => {
         navigate("/");
       } catch (error) {
         toast.update(toastId, {
-          render: error.response?.data?.message || "Error during signin",
+          render: error.response?.data?.message || "Error during SIGN IN",
           type: "error",
           isLoading: false,
           autoClose: 2000,
@@ -87,7 +95,7 @@ const Signin = () => {
          
         </div>
       </div>
-     <ToastContainer/>
+     <ToastContainer position="top-center"/>
     </>
     )
 }
