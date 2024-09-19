@@ -1,9 +1,10 @@
-import  {Navbar}  from "./component/Index";
+// import  {Navbar}  from "./component/Index";
+import Signup from "./pages/Signup"
 
 export default function App() {
   return (
    <>
-      <Navbar/>
+      <Signup/>
    </>
   )
 }
