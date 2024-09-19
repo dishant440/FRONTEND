@@ -2,17 +2,21 @@
 import Signin from "./pages/Signin"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
+import { AuthProvider } from "./context/AuthContext";
 
+function App() {
 
-export default function App() {
   return (
-   <>
+   <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Signin/>}/>
-          <Route path="/dashboard" element={<Dashboard/>}/>
+          <Route path="/signin" element={<Signin/>}/>
+          <Route path="/" element={<Dashboard/>}/>
         </Routes>
       </BrowserRouter>
-   </>
+   </AuthProvider>
   )
 }
+
+
+export default App;
