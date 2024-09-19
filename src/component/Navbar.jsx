@@ -1,8 +1,7 @@
 import React from "react";
-import { Logo } from "./Logo";
-import { User } from "./User";
+import { Logo,User } from "./Index";
 
-export const Navbar = () =>{
+const Navbar = () =>{
     return (
         <>
             <div className="navbar bg-black h-16 w-full">
@@ -16,3 +15,4 @@ export const Navbar = () =>{
 
 }
 
+export default Navbar;

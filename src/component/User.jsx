@@ -1,6 +1,6 @@
 import React from "react";
 
-export const User = () => {
+const User = () => {
     return(
         <>
             <div className="flex flex-row gap-2">
@@ -12,3 +12,5 @@ export const User = () => {
         </>
     )
 }
+
+export default User;
