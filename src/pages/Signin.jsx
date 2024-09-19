@@ -1,22 +1,60 @@
 import React from "react";
 import { useState } from "react";
 import {Input,Button} from "../component/Index"
+import axios from "axios";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const Signin = () => {
-    const [name,setName] = useState("");
+
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
+    const navigate = useNavigate();
+    const login = useAuth();
+
+    async function handleSubmit(e){
+      e.preventDefault();
+      const toastId = toast.loading("Signing in...");
+      try {
+        const response = await axios.post("http://localhost:7000/api/login",{
+          email,
+          password
+        });
+        localStorage.setItem("token", response.data.token);
+        axios.defaults.headers.common[
+        "Authorization"
+        ] = `Bearer ${response.data.token}`;
+        toast.update(toastId, {
+          render: "Signin successful!",
+          type: "success",
+          isLoading: false,
+          autoClose: 2000,
+        });
+        login();
+        navigate("/");
+      } catch (error) {
+        toast.update(toastId, {
+          render: error.response?.data?.message || "Error during signin",
+          type: "error",
+          isLoading: false,
+          autoClose: 2000,
+        });
+      }
+
+    }
 
     return(
        <>
+    
       <div className="flex justify-evenly items-center p-4 mt-44 ">
         <div className="left bg-white shadow-xl hover:shadow-2xl flex flex-col w-[300px] h-[400px] justify-center items-center border-t-2  mt-5">
           <div className="mb-6 text-center">
-            <h1 className="text-3xl font-bold">Sign In</h1>
-            
-          
+            <h1 className="text-3xl font-bold">Sign In</h1>           
           </div>
-          <form >
+          <form onSubmit={handleSubmit}>
 
             <div className="mb-5">
 
@@ -49,7 +87,7 @@ const Signin = () => {
          
         </div>
       </div>
-     
+     <ToastContainer/>
     </>
     )
 }
