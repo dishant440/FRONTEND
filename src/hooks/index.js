@@ -5,7 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 export const customHooks = () =>{
     const [error ,setError] = useState(null);
     const [loading,setLoading] = useState(false);
-    const [content,setContent] = useState([]);
+    const [content, setContent] = useState({ Folders: [], Files: [] });
+
     const token = localStorage.getItem("token");
 
     const fetchAllContent = async () => {
@@ -17,6 +18,8 @@ export const customHooks = () =>{
                 }
             })
             setContent(response.data);
+            console.log(response.data);
+            
         } catch (error) {
             setError(error.response?.data?.message || error.message);
           } finally {
