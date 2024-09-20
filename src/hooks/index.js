@@ -2,14 +2,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 
-
 export const customHooks = () =>{
     const [error ,setError] = useState(null);
     const [loading,setLoading] = useState(false);
     const [content,setContent] = useState([]);
-    const token = localStorage.getItem("token")
-    const fetchAllContent = async () => {
+    const token = localStorage.getItem("token");
 
+    const fetchAllContent = async () => {
        setLoading(true);    
         try {   
             const response = await axios.get("http://localhost:7000/api/allContent",{
