@@ -3,33 +3,27 @@ import { createContext, useContext, useState, useEffect } from "react";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState(""); 
-
-  // Load user from localStorage on initial render
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(storedUser);
-      setIsAuthenticated(true); // Assume user is authenticated if data is in localStorage
-    }
-  }, []);
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    () => localStorage.getItem("isAuthenticated") === "true"
+  );
+  const [user, setUser] = useState(() => localStorage.getItem("user") || "");
 
   const login = (userData) => {
     setIsAuthenticated(true);
     setUser(userData);
-    localStorage.setItem("user", userData); // Save user to localStorage
+    localStorage.setItem("isAuthenticated", "true"); 
+    localStorage.setItem("user", userData); 
   };
 
   const logout = () => {
     setIsAuthenticated(false);
     setUser("");
-    localStorage.removeItem("user"); // Remove user from localStorage
-    localStorage.setItem("token", "");
+    localStorage.removeItem("isAuthenticated"); 
+    localStorage.removeItem("user");
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, user }}>
       {children}
     </AuthContext.Provider>
   );

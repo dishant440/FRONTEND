@@ -9,14 +9,14 @@ import React from 'react';
         <ul className="space-y-4">
         <li
             className="text-lg font-medium group bg-amber-500 text-white hover:bg-amber-400 active:bg-amber-600 active:scale-95 active:shadow-inner p-2 rounded-md cursor-pointer flex items-center"
-            onClick={() => onSelect('status')}
+            onClick={() => onSelect('')}
         >
             
             CREATE FOLDER
           </li>
           <li
             className="text-lg font-medium group bg-amber-500 text-white hover:bg-amber-400 active:bg-amber-600 active:scale-95 active:shadow-inner p-2 rounded-md cursor-pointer flex items-center"
-            onClick={() => onSelect('operations')}
+            onClick={() => onSelect('')}
           >
             
             UPLOAD FILE

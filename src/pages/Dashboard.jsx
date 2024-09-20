@@ -13,7 +13,7 @@ const Dashboard = () =>{
         <div className="flex flex-col h-screen">
       <Navbar />
       <div className="flex ">
-        <div className="flex-none w-48">
+        <div className="flex-none ">
           <Sidebar onSelect={handleSelection} />
         </div>
         <div className="flex-1 ">
