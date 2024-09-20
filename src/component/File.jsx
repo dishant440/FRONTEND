@@ -30,15 +30,15 @@ const formatTime = (isoDate) => {
 }
 
 
-const Folder = memo((props) => {
+const File = memo((props) => {
     const formattedTime = formatTime(props.dateOfCreation);
     const formattedDate = formatDate(props.dateOfCreation);
 
     return (
         <div className="folder-div hover:shadow-md border-amber-400 flex flex-row justify-between items-center bg-gray-200 p-4">
             <div className="left-side flex flex-row items-center gap-2"> 
-                <img src="/folder.png" alt="Folder Icon" />
-                <span className="font-serif">{props.folderName}</span>
+                <img src="/fileIcon.png" alt="File" />
+                <span className="font-serif">{props.fileName}</span>
             </div>
             <div className="right-side flex flex-row items-center justify-center gap-8">
                 <span className="font-bold mr-14">{formattedTime+" IST"}</span>
@@ -50,6 +50,6 @@ const Folder = memo((props) => {
     );
 });
 
-export default Folder;
+export default File;
 
 
