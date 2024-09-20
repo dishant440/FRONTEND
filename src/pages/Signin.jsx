@@ -36,8 +36,11 @@ const Signin = () => {
         });
         
 
-    
+        const userData = response.data.user;
+        console.log(userData);
+        
         localStorage.setItem("token", response.data.token);
+
         axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.token}`;
   
         toast.update(toastId, {
@@ -47,8 +50,8 @@ const Signin = () => {
           autoClose: 2000,
         });
     
-        login(); 
-        navigate("/");
+        login(userData); 
+        navigate("/admin");
       } catch (error) {
       
         toast.update(toastId, {

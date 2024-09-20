@@ -3,7 +3,7 @@ import React from 'react';
  const SideBar = ({ onSelect }) => {
   return (
     <div
-      className="fixed top-[4rem] left-0 h-full bg-black pt-5 mt-4 text-white text-white w-52 shadow-md border-t-2 border-amber-400"
+      className="fixed top-[4rem] left-0 h-full bg-black pt-5 mt-4 text-white text-white w-52 shadow-md"
     >
       <div className="p-6">
         <ul className="space-y-4">
