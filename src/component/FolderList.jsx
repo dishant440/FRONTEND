@@ -1,150 +1,102 @@
-
-// import React, { useEffect } from "react";
-// import Folder from "./Folder";
-// import { customHooks } from "../hooks";
-// import File from "./File";
-// import { useNavigate } from "react-router-dom";
-
-// const FolderList = () => {
-//     const navigate = useNavigate();
-//     const { fetchAllContent, loading, error, content } = customHooks();
-
-//     useEffect(() => {
-//         fetchAllContent();
-//         console.log("fetch content function called");
-//     }, []);
-
-//     if (loading) {
-//         return <div>Loading...</div>;
-//     }
-
-//     if (error) {
-//         return <div>Error: {error}</div>;
-//     }
-
-//     const handleFolderClick = (id) =>{
-//         navigate(`/content/${id}`)
-//     }
-
-//     return (
-//         <div className="p-10 flex flex-col gap-4">
-//             {/* Render Folders */}
-//             {content.Folders && content.Folders.length > 0 ? (
-//                 content.Folders.map(folder => (
-//                     <Folder
-//                         key={folder._id}
-//                         folderName={folder.folderName}
-//                         dateOfCreation={folder.dateOfCreation}
-//                         onClick = {handleFolderClick}
-//                     />
-//                 ))
-//             ) : (
-//                 <div>No folders available</div>
-//             )}
-
-//             {/* Render Files */}
-//             {content.Files && content.Files.length > 0 ? (
-//                 content.Files.map(file => (
-//                     <File key={file._id} file={file} fileName={file.fileName} dateOfCreation={file.dateOfCreation} />
-//                 ))
-//             ) : (
-//                 <div>No files available</div>
-//             )}
-//         </div>
-//     );
-// };
-
-// export default FolderList;
 import React, { useEffect, useState } from "react";
 import Folder from "./Folder";
-import { customHooks } from "../hooks";
 import File from "./File";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const FolderList = () => {
-    const [subContent, setSubContent] = useState(null);  // State for subfolder content
-    const navigate = useNavigate();
-    const { fetchAllContent, loading, error, content } = customHooks();
+  const [currentContent, setCurrentContent] = useState(null); // To store the current folder content
+  const [folderStack, setFolderStack] = useState([]);         // Stack to keep track of folder navigation
+  const [loading, setLoading] = useState(true);               // Track loading state
+  const [error, setError] = useState(null);                   // Track errors
 
-    useEffect(() => {
-        fetchAllContent();
-        console.log("fetch content function called");
-    }, []);
+  // Fetch the root folder content initially
+  useEffect(() => {
+    fetchContent(null);
+  }, []);
 
-    const handleFolderClick = async (id) => {
-        try {
-            const response = await axios.get(`http://localhost:7000/api/${id}`);
-            setSubContent(response.data);  
-        } catch (err) {
-            console.error("Error fetching folder content", err);
-        }
-    };
+  // Function to fetch content (for root or subfolders)
+  const fetchContent = async (id) => {
+    setLoading(true);
+    setError(null);
 
-    if (loading) {
-        return <div>Loading...</div>;
+    try {
+      const response = await axios.get(
+        id ? `http://localhost:7000/api/content/${id}` : `http://localhost:7000/api/allContent`
+      );
+      setCurrentContent(response.data);
+      setLoading(false);
+    } catch (err) {
+      setError("Error fetching folder content");
+      setLoading(false);
     }
+  };
 
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
+  // Handle folder click: Navigate to subfolder and add current folder to stack
+  const handleFolderClick = (folder) => {
+    setFolderStack([...folderStack, { id: folder._id, folderName: folder.folderName }]); // Push folder to stack
+    fetchContent(folder._id); // Fetch subfolder content
+  };
 
-    return (
-        <div className="p-10 flex flex-col gap-4">
-            {/* Render Folders */}
-            {content.Folders && content.Folders.length > 0 ? (
-                content.Folders.map(folder => (
-                    <Folder
-                        key={folder._id}
-                        folderName={folder.folderName}
-                        dateOfCreation={folder.dateOfCreation}
-                        onClick={() => handleFolderClick(folder._id)} // Handle folder click
-                    />
-                ))
-            ) : (
-                <div>No folders available</div>
-            )}
+  // Handle back button: Navigate to parent folder
+  const handleBack = () => {
+    const newStack = [...folderStack];
+    newStack.pop(); // Remove the last folder from the stack
+    setFolderStack(newStack);
 
-            {/* Render Files */}
-            {content.Files && content.Files.length > 0 ? (
-                content.Files.map(file => (
-                    <File key={file._id} file={file} fileName={file.fileName} dateOfCreation={file.dateOfCreation} />
-                ))
-            ) : (
-                <div>No files available</div>
-            )}
+    // Fetch parent folder content (if available), or root content if stack is empty
+    const parentFolder = newStack.length > 0 ? newStack[newStack.length - 1].id : null;
+    fetchContent(parentFolder);
+  };
 
-            {/* Render Subfolders and Files of the clicked folder */}
-            {subContent && (
-                <div>
-                    <h2>Subfolders and Files</h2>
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-                    {/* Render Subfolders */}
-                    {subContent.Folders && subContent.Folders.length > 0 ? (
-                        subContent.Folders.map(folder => (
-                            <Folder
-                                key={folder._id}
-                                folderName={folder.folderName}
-                                dateOfCreation={folder.dateOfCreation}
-                                onClick={() => handleFolderClick(folder._id)}  // Handle subfolder click recursively
-                            />
-                        ))
-                    ) : (
-                        <div>No subfolders available</div>
-                    )}
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
-                    {/* Render Subfiles */}
-                    {subContent.Files && subContent.Files.length > 0 ? (
-                        subContent.Files.map(file => (
-                            <File key={file._id} file={file} fileName={file.fileName} dateOfCreation={file.dateOfCreation} />
-                        ))
-                    ) : (
-                        <div>No files available</div>
-                    )}
-                </div>
-            )}
-        </div>
-    );
+  return (
+    <div className="p-10 flex flex-col gap-4">
+      {/* Back button, only show if there's a parent folder in the stack */}
+      {folderStack.length > 0 && (
+        <button onClick={handleBack} className="bg-black w-24 text-white p-2 mx-auto rounded">
+          {"GO BACK"} 
+        </button>
+      )}
+      
+
+      {/* Render Folders */}
+      {
+  currentContent?.Folders?.length === 0 &&
+  currentContent?.Files?.length === 0 ? (
+    <div className="flex justify-center text-2xl mt-10">Empty</div>
+  ) : (
+    <>
+      {/* Render Folders */}
+      {currentContent.Folders && currentContent.Folders.length > 0 && (
+        currentContent.Folders.map((folder) => (
+          <Folder
+            key={folder._id}
+            folderName={folder.folderName}
+            dateOfCreation={folder.dateOfCreation}
+            onClick={() => handleFolderClick(folder)} // Handle folder click
+          />
+        ))
+      )}
+
+      {/* Render Files */}
+      {currentContent.Files && currentContent.Files.length > 0 && (
+        currentContent.Files.map((file) => (
+          <File key={file._id} fileName={file.fileName} dateOfCreation={file.dateOfCreation} />
+        ))
+      )}
+    </>
+  )
+}
+
+    </div>
+  );
 };
 
 export default FolderList;
