@@ -3,11 +3,11 @@ import Heading from "./Heading"
 import FolderList from "./FolderList";
 
 
-const MainComponent = () => {
+const MainComponent = ({setParentFolderId}) => {
     return (
        <>
         <Heading/>
-        <FolderList/>
+        <FolderList setParentFolderId={setParentFolderId}/>
        </>
     );
 };

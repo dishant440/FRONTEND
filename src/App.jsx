@@ -14,6 +14,7 @@ function App() {
         <Routes>
         <Route path="/" element={<Navigate to="/admin" />} />
           <Route path="/admin" element={<ProtectedRoute><Dashboard/></ProtectedRoute>}/>
+          <Route path="/content/:folderId" element={<ProtectedRoute><Dashboard/></ProtectedRoute>}/>
           <Route path="/signin" element={<Signin/>}/>
         </Routes>
       </BrowserRouter>
