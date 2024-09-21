@@ -20,7 +20,7 @@ const FolderList = () => {
 
     try {
       const response = await axios.get(
-        id ? `http://localhost:7000/api/contenT/${id}` : `http://localhost:7000/api/allContent`
+        id ? `http://localhost:7000/api/content/${id}` : `http://localhost:7000/api/allContent`
       );
       setCurrentContent(response.data);
     } catch (err) {
@@ -62,7 +62,7 @@ const FolderList = () => {
 
       {/* Render content or empty state */}
       {currentContent?.Folders?.length === 0 && currentContent?.Files?.length === 0 ? (
-        <div className="flex justify-center text-2xl mt-10">Empty</div>
+        <div className="flex justify-center text-2xl mt-10">Folder Empty</div>
       ) : (
         <>
           {/* Render Folders */}
