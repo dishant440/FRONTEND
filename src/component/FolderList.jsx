@@ -3,6 +3,16 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Loading, File, Folder } from "./Index";
 
+const convertToIST = (date) => {
+  // Create a new Date object in UTC
+  const utcDate = new Date(date);
+  
+  // Convert UTC to IST
+  const istDate = new Date(utcDate.getTime() + 5 * 60 * 60 * 1000 + 30 * 60 * 1000); // Add 5 hours 30 minutes
+  
+  return istDate;
+};
+
 const FolderList = ({ setParentFolderId }) => {
   const { folderId } = useParams(); // Get the folder ID from the URL
   const navigate = useNavigate();
@@ -51,7 +61,7 @@ const FolderList = ({ setParentFolderId }) => {
             <Folder
               key={folder._id}
               folderName={folder.folderName}
-              dateOfCreation={folder.dateOfCreation}
+              dateOfCreation={convertToIST(folder.dateOfCreation)}
               onClick={() => handleFolderClick(folder)}
             />
           ))}
