@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useFolder } from "../hooks";
+import { useHooks } from "../hooks";
 
 const FolderForm = ({ onClose, parentFolderId, onFolderCreated }) => {
-  const { createFolder, loading } = useFolder();
+  const { createFolder, loading } = useHooks();
   const [folderName, setFolderName] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false); 
 
@@ -20,7 +20,8 @@ const FolderForm = ({ onClose, parentFolderId, onFolderCreated }) => {
       // Error handling is done with toast, so no need to update local state here.
     }
   };
-
+  console.log("FOLDER FORM RE RENDER");
+  
   return (
     <div className="bg-black text-white p-6 rounded-lg shadow-lg w-96">
       <h2 className="text-xl font-bold mb-4">Create Folder</h2>

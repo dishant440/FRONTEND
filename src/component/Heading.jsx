@@ -1,4 +1,8 @@
+import React from "react";
+
 const Heading = ({refreshFolders}) => {
+    console.log("HEADING RE RENDERS");
+    
     return(
         <>
         <div className="flex flex-col">
@@ -14,12 +18,7 @@ const Heading = ({refreshFolders}) => {
             </div>
             <div className="flex justify-center m-4">
 
-            <button
-                    className="bg-black font-bold text-amber-400  py-2 rounded-md mr-36 w-24 items-center "
-                    onClick={refreshFolders}
-                    >
-                        REFRESH
-                    </button>
+            
                         </div>
         </div>
         </>
@@ -27,4 +26,4 @@ const Heading = ({refreshFolders}) => {
 }
 
 
-export default Heading;
+export default React.memo(Heading);

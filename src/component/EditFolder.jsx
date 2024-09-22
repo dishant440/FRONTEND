@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useFolder } from "../hooks";
+import React, {  useState } from "react";
+import { useHooks } from "../hooks";
 import { toast } from "react-toastify";
 
 const EditFolder = ({ folderId, initialFolderName, onClose }) => {
-  const { editFolder, loading, error } = useFolder();
+  const { editFolder, loading, error } = useHooks();
   const [newFolderName, setNewFolderName] = useState(initialFolderName);
 
   const handleSubmit = async (e) => {

@@ -33,6 +33,8 @@ const formatTime = (isoDate) => {
 const File = memo((props) => {
     const formattedTime = formatTime(props.dateOfCreation);
     const formattedDate = formatDate(props.dateOfCreation);
+    console.log("FILE RE RENDERS");
+    
 
     return (
         <div className="folder-div hover:shadow-md border-amber-400 flex flex-row justify-between items-center bg-gray-200 p-4">

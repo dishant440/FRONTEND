@@ -2,6 +2,8 @@
 import React from "react";
 
 const Sidebar = React.memo(({ onSelect }) => {
+  console.log("SIDEBAR RE RENDERS");
+  
   return (
     <div className=" top-[4rem] left-0 h-full bg-black pt-5 text-white w-52 shadow-md">
       <div className="p-6">
@@ -24,4 +26,4 @@ const Sidebar = React.memo(({ onSelect }) => {
   );
 });
 
-export default Sidebar;
+export default React.memo(Sidebar);

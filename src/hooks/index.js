@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export const useFolder = () => {
+export const useHooks = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
@@ -76,14 +76,19 @@ export const useFolder = () => {
         
       }
 
-      const deleteFolder = async () =>{
+      const deleteFolder = async (id) =>{
+        const token = localStorage.getItem("token")
         setLoading(true);
         setError(null); 
-        setSuccess(""); 
+     
         const toastId = toast.loading("Deleting Folder ...");
         
         try {
-          const response = await axios.delete(`http://localhost:7000/api/deleteFolder/${id}`);
+          const response = await axios.delete(`http://localhost:7000/api/deleteFolder/${id}`,{
+            headers: {
+              Authorization:`Bearer ${token}`
+            }
+          });
           toast.update(toastId,{
             render:"Folder deleted successfully",
             type:"success",
@@ -92,10 +97,22 @@ export const useFolder = () => {
           })  
         } catch (error) {
           const errorMsg = error.response?.data?.message || error.message;
-          toast.update(toast)
+          toast.update(toastId,{
+            render:errorMsg,
+            type:"error",
+            autoClose:2000,
+            isLoading:false
+          })
+        }finally{
+          setLoading(false);
         }
       }
     
+      const fileUpload = async () =>{
+        
+      }
+      
+
     return { createFolder, loading ,error ,success ,editFolder ,deleteFolder};
 
 };

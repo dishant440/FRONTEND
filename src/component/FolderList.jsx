@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Loading, File, Folder } from "./Index";
 import EditFolder from "./EditFolder";
-
+import { useHooks } from "../hooks";
 
 const convertToIST = (date) => {
   // Create a new Date object in UTC
@@ -23,11 +23,13 @@ const FolderList = ({ setParentFolderId,refreshKey }) => {
   const [error, setError] = useState(null);                   // Error state
   const [editingFolder, setEditingFolder] = useState(null);
   const [showEditForm,setShowFolderForm] = useState(false);
+  const {deleteFolder} = useHooks();
+  const [folders, setFolders] = useState([]); // State to hold folders data
   // Fetch content for the current folder (or root if no folderId)
   
   useEffect(() => {
     fetchContent(folderId);
-  }, [folderId,refreshKey]);
+  }, [folderId,refreshKey,setFolders]);
 
   const openEditForm = (folderId, folderName) => {
     setEditingFolder({ folderId, folderName });
@@ -38,6 +40,7 @@ const FolderList = ({ setParentFolderId,refreshKey }) => {
     setEditingFolder(null);
     setShowFolderForm(false)
   };
+  
 
   const fetchContent = async (id = null) => {
     setLoading(true);
@@ -48,6 +51,7 @@ const FolderList = ({ setParentFolderId,refreshKey }) => {
         id ? `http://localhost:7000/api/content/${id}` : `http://localhost:7000/api/allContent`
       );
       setCurrentContent(response.data);
+      setFolders(response.data)
       setParentFolderId(id); // Update the parent folder ID
     } catch (err) {
       setError("Error fetching folder content");
@@ -56,14 +60,24 @@ const FolderList = ({ setParentFolderId,refreshKey }) => {
     }
   };
 
+  
   // Handle folder click
   const handleFolderClick = (folder) => {
     navigate(`/content/${folder._id}`); // Update the URL with the folder ID
   };
 
+  const handleDeleteFolder = async (folderId) => {
+    await deleteFolder(folderId);
+    // Update the folder list after deletion by filtering out the deleted folder
+    setFolders(folders.filters(folder => folder._id !== folderId));
+  
+    
+  };
+
   if (loading) return <Loading />;
   if (error) return <div>Error: {error}</div>;
-
+  console.log("FORMLIST RE RENDER");
+  
   return (
     <div className="p-10 flex flex-col gap-4">
       {currentContent?.Folders?.length === 0 && currentContent?.Files?.length === 0 ? (
@@ -88,6 +102,7 @@ const FolderList = ({ setParentFolderId,refreshKey }) => {
               dateOfCreation={convertToIST(folder.dateOfCreation)}
               onClick={() => handleFolderClick(folder)}
               onClickEdit={() => openEditForm(folder._id, folder.folderName)} // Trigger edit
+              onClickDelete={() => handleDeleteFolder(folder._id)} // Call delete handler
             />
           ))}
 
@@ -101,4 +116,4 @@ const FolderList = ({ setParentFolderId,refreshKey }) => {
   );
 };
 
-export default FolderList;
+export default React.memo(FolderList);

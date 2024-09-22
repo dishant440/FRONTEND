@@ -2,6 +2,8 @@ import React from "react";
 import { Logo,User } from "./Index";
 
 const Navbar = () =>{
+    console.log("NAVBAR RE RENDER");
+    
     return (
         <>
             <div className="navbar bg-black h-20 w-full  border-amber-400">
@@ -15,4 +17,4 @@ const Navbar = () =>{
 
 }
 
-export default Navbar;
+export default React.memo(Navbar);
