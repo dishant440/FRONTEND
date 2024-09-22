@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Loading, File, Folder } from "./Index";
+import EditFolder from "./EditFolder";
+
 
 const convertToIST = (date) => {
   // Create a new Date object in UTC
@@ -19,12 +21,23 @@ const FolderList = ({ setParentFolderId,refreshKey }) => {
   const [currentContent, setCurrentContent] = useState(null); // Current folder content
   const [loading, setLoading] = useState(true);               // Loading state
   const [error, setError] = useState(null);                   // Error state
-
+  const [editingFolder, setEditingFolder] = useState(null);
+  const [showEditForm,setShowFolderForm] = useState(false);
   // Fetch content for the current folder (or root if no folderId)
   
   useEffect(() => {
     fetchContent(folderId);
   }, [folderId,refreshKey]);
+
+  const openEditForm = (folderId, folderName) => {
+    setEditingFolder({ folderId, folderName });
+    setShowFolderForm(true)
+  };
+
+  const closeEditForm = () => {
+    setEditingFolder(null);
+    setShowFolderForm(false)
+  };
 
   const fetchContent = async (id = null) => {
     setLoading(true);
@@ -58,12 +71,23 @@ const FolderList = ({ setParentFolderId,refreshKey }) => {
       ) : (
         <>
           {/* Render Folders */}
+          {showEditForm && (
+            <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
+
+        <EditFolder
+          folderId={editingFolder.folderId}
+          initialFolderName={editingFolder.folderName}
+          onClose={closeEditForm}
+          />
+          </div>
+      )}
           {currentContent.Folders?.map((folder) => (
             <Folder
               key={folder._id}
               folderName={folder.folderName}
               dateOfCreation={convertToIST(folder.dateOfCreation)}
               onClick={() => handleFolderClick(folder)}
+              onClickEdit={() => openEditForm(folder._id, folder.folderName)} // Trigger edit
             />
           ))}
 

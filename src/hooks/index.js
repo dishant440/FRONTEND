@@ -52,9 +52,12 @@ export const useFolder = () => {
     const toastId = toast.loading("Editing Folder");
 
       try {
-        const response = await axios.put("http://localhost:7000/api/editFolder");
+        const response = await axios.put("http://localhost:7000/api/editFolder",{
+          newName,
+          folderId
+        });
         toast.update(toastId, {
-          render: "Folder edited successfully",
+          render: "Folder edited successfully Refresh Page",
           type: "success",
           isLoading: false,
           autoClose: 2000,
