@@ -5,11 +5,14 @@ import Dashboard from "./pages/Dashboard";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./component/ProtectedRoute";
 import { Navigate } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css"
 
 function App() {
 
   return (
-   <AuthProvider>
+   <>
+    <AuthProvider>
       <BrowserRouter>
         <Routes>
         <Route path="/" element={<Navigate to="/admin" />} />
@@ -19,6 +22,8 @@ function App() {
         </Routes>
       </BrowserRouter>
    </AuthProvider>
+   <ToastContainer position="top-center"/>
+   </>
   )
 }
 
