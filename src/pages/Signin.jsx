@@ -88,6 +88,7 @@ const Signin = () => {
 
             <Input
                 Label="PASSWORD"
+                Type="password"
                 Placeholder="*******"
                 name="password"
                 Value={password}

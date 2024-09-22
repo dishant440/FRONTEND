@@ -11,7 +11,7 @@ export const useFolder = () => {
     setLoading(true);
     setError(null); 
     setSuccess(""); 
-    const toastId = toast.loading("Creating Folder");
+    const toastId = toast.loading("Creating Folder ....");
 
 
     try {
@@ -75,7 +75,27 @@ export const useFolder = () => {
       }
         
       }
+
+      const deleteFolder = async () =>{
+        setLoading(true);
+        setError(null); 
+        setSuccess(""); 
+        const toastId = toast.loading("Deleting Folder ...");
+        
+        try {
+          const response = await axios.delete(`http://localhost:7000/api/deleteFolder/${id}`);
+          toast.update(toastId,{
+            render:"Folder deleted successfully",
+            type:"success",
+            isLoading:false,
+            autoClose:2000,
+          })  
+        } catch (error) {
+          const errorMsg = error.response?.data?.message || error.message;
+          toast.update(toast)
+        }
+      }
     
-    return { createFolder, loading, error, success ,editFolder};
+    return { createFolder, loading ,error ,success ,editFolder ,deleteFolder};
 
 };
