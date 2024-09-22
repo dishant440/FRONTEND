@@ -1,39 +1,3 @@
-// import { useState } from "react";
-// import axios from "axios";
-
-// export const useFolder = () => {
-//   const [error, setError] = useState(null);
-//   const [loading, setLoading] = useState(false);
-//   const [success, setSuccess] = useState("");
-
-//   const createFolder = async (folderName, parentFolderId) => {
-//     setLoading(true);
-//     setError(null); // Reset error state on new request
-//     setSuccess(""); // Reset success state on new request
-
-//     try {
-//       const token = localStorage.getItem("token");
-//       const response = await axios.post("http://localhost:7000/api/createFolder", {
-//         folderName,
-//         parentFolderId,
-//       }, {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       });
-//       setSuccess("Folder created successfully");
-//     } catch (error) {
-//       setError(error.response?.data?.message || error.message);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   return { createFolder, loading, error, success };
-// };
-
-
-
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -45,8 +9,8 @@ export const useFolder = () => {
 
   const createFolder = async (folderName, parentFolderId) => {
     setLoading(true);
-    setError(null); // Reset error state on new request
-    setSuccess(""); // Reset success state on new request
+    setError(null); 
+    setSuccess(""); 
     const toastId = toast.loading("Creating Folder");
 
 
@@ -82,5 +46,33 @@ export const useFolder = () => {
     }
   };
 
-  return { createFolder, loading, error, success };
+  const editFolder = async (newName,folderId) =>{
+      setLoading(true);
+      setError(null);
+    const toastId = toast.loading("Editing Folder");
+
+      try {
+        const response = await axios.put("http://localhost:7000/api/editFolder");
+        toast.update(toastId, {
+          render: "Folder edited successfully",
+          type: "success",
+          isLoading: false,
+          autoClose: 2000,
+        })
+      } catch (error) {
+        const errorMsg = error.response?.data?.message || error.message;
+        toast.update(toastId,{
+          render:errorMsg,
+          type:"error",
+          isLoading:false,
+          autoClose:2000,
+        });
+      }finally{
+        setLoading(false);
+      }
+        
+      }
+    
+    return { createFolder, loading, error, success ,editFolder};
+
 };
