@@ -13,7 +13,7 @@ const convertToIST = (date) => {
   return istDate;
 };
 
-const FolderList = ({ setParentFolderId }) => {
+const FolderList = ({ setParentFolderId,refreshKey }) => {
   const { folderId } = useParams(); // Get the folder ID from the URL
   const navigate = useNavigate();
   const [currentContent, setCurrentContent] = useState(null); // Current folder content
@@ -21,9 +21,10 @@ const FolderList = ({ setParentFolderId }) => {
   const [error, setError] = useState(null);                   // Error state
 
   // Fetch content for the current folder (or root if no folderId)
+  
   useEffect(() => {
     fetchContent(folderId);
-  }, [folderId]);
+  }, [folderId,refreshKey]);
 
   const fetchContent = async (id = null) => {
     setLoading(true);
