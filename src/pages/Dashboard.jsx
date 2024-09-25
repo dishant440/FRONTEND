@@ -69,11 +69,12 @@ import React, { useState, useCallback, useEffect } from "react";
 import { MainComponent, Navbar, Sidebar } from "../component/Index";
 import FolderForm from "../component/FolderForm";
 import axios from "axios"; // Import axios for API calls
-
+import UploadFileForm from "../component/UploadFileForm"
 const Dashboard = () => {
   const [showFolderForm, setShowFolderForm] = useState(false);
   const [parentFolderId, setParentFolderId] = useState("");
   const [folders, setFolders] = useState([]); // State to store folder data
+  const [fileUpload,setFileUpload] = useState(false);
 
   console.log("DASHBOARD RENDERS");
 
@@ -100,6 +101,9 @@ const Dashboard = () => {
       setParentFolderId(folderId);
       setShowFolderForm(true);
     }
+    if (action === "uploadFile") {
+      setFileUpload(true)
+  }
   }, []);
 
   // Fetch root folder data when the component mounts
@@ -122,6 +126,14 @@ const Dashboard = () => {
                 onClose={() => setShowFolderForm(false)} 
                 onFolderCreated={refreshFolderList} // Pass the refresh function
               />
+            </div>
+          )}
+            {fileUpload && (
+            <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
+                <UploadFileForm
+                onClose={() => setFileUpload(false)}
+                parentFolderId={parentFolderId}
+                />
             </div>
           )}
           <MainComponent setParentFolderId={setParentFolderId} />

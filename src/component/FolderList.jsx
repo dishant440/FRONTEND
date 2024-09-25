@@ -42,7 +42,7 @@ const FolderList = ({ setParentFolderId,refreshKey }) => {
   };
   
 
-  const fetchContent = async (id = null) => {
+  const fetchContent = async (id ) => {
     setLoading(true);
     setError(null);
 

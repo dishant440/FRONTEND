@@ -7,6 +7,114 @@ export const useHooks = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
 
+
+  // const uploadFile = async (file, parentFolderId) => {
+  //   if (!file) return;
+
+  //   setLoading(true);
+  //   setError("");
+
+  //   const formData = new FormData();
+  //   formData.append("file", file);
+  //   formData.append("parentFolderId", parentFolderId); // Send parentFolderId if needed
+
+  //   try {
+  //     await axios.post("http://192.168.29.65:7000/api/file/upload", formData, {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //     });
+  //     toast.success("File uploaded successfully!");
+  //   } catch (err) {
+  //     console.log(err.message);
+      
+  //     setError("Error uploading file");
+  //     toast.error("Error uploading file");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+  // const uploadFile = async (file, folderId) => {
+  //   if (!file) return;
+  //   console.log("folderId : "+folderId);
+    
+  //   setLoading(true);
+  //   setError("");
+  //   const toastId  = toast.loading("Uploading file...")
+  //   const formData = new FormData();
+  //   formData.append("file", file);
+  //   formData.append("folderId", folderId); // Change parentFolderId to folderId
+  //   const token = localStorage.getItem("token")
+    
+  //   try {
+  //     await axios.post("http://192.168.29.65:7000/api/file/upload", formData, {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //         Authorization:`Bearer ${token}`
+  //       },
+  //     });
+  //     // toast.success("File uploaded successfully!");
+  //     toast.success(toastId,)
+  //   } catch (err) {
+  //     console.log(err.message);
+  
+  //     setError("Error uploading file");
+  //     toast.error("Error uploading file");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+  const uploadFile = async (file, folderId) => {
+  if (!file) return;
+  console.log("folderId : " + folderId);
+
+  setLoading(true);
+  setError("");
+  
+  // Start loading toast
+  const toastId = toast.loading("Uploading file...");
+  
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("folderId", folderId); // Send folderId
+  
+  const token = localStorage.getItem("token");
+  
+  try {
+    // Make the POST request to the backend API
+    await axios.post("http://192.168.29.65:7000/api/file/upload", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    
+    // Update the toast to success message after the file upload completes
+    toast.update(toastId, {
+      render: "File uploaded successfully!",
+      type: "success",
+      isLoading: false,
+      autoClose: 3000, // Close after 3 seconds
+    });
+
+  } catch (err) {
+    console.error(err.message);
+
+    // Update the toast to show an error message if the upload fails
+    toast.update(toastId, {
+      render: "Error uploading file",
+      type: "error",
+      isLoading: false,
+      autoClose: 5000, // Close after 5 seconds
+    });
+    
+    setError("Error uploading file");
+    
+  } finally {
+    setLoading(false);
+  }
+};
+
   const createFolder = async (folderName, parentFolderId) => {
     setLoading(true);
     setError(null); 
@@ -108,11 +216,9 @@ export const useHooks = () => {
         }
       }
     
-      const fileUpload = async () =>{
-        
-      }
+    
       
 
-    return { createFolder, loading ,error ,success ,editFolder ,deleteFolder};
+    return { createFolder, loading ,error ,success ,editFolder ,deleteFolder ,uploadFile};
 
 };
