@@ -45,9 +45,12 @@ export const useServiceEngineer = () => {
       
       toast.success("Service Engineer added successfully!"); 
       return response.data; 
-    } catch (error) {
-      setError(error.response?.data?.message || "Failed to add service engineer");
-      toast.error(error || "Failed to add service engineer"); 
+
+
+    } catch (err) {
+      setError(err.response?.data?.message || "Failed to add service engineer");
+      toast.error(error || "Failed to add service engineer"); // Show error notification
+
     } finally {
       setLoading(false);
     }
