@@ -3,6 +3,8 @@ import { MainComponent, Navbar, Sidebar } from "../component/Index";
 import FolderForm from "../component/FolderForm";
 import axios from "axios"; // Import axios for API calls
 import UploadFileForm from "../component/UploadFileForm"
+
+
 const Dashboard = () => {
   const [showFolderForm, setShowFolderForm] = useState(false);
   const [parentFolderId, setParentFolderId] = useState("");
@@ -76,4 +78,4 @@ const Dashboard = () => {
   );
 };
 
-export default React.memo(Dashboard); // Memoize Dashboard to prevent re-renders unless props change
+export default React.memo(Dashboard); 

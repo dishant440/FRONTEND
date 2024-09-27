@@ -5,20 +5,26 @@ const Sidebar = React.memo(({ onSelect }) => {
   console.log("SIDEBAR RE RENDERS");
   
   return (
-    <div className=" top-[4rem] left-0 h-full bg-black pt-5 text-white w-52 shadow-md">
+    <div className=" top-[4rem] left-0 h-full bg-black pt-5 text-white w-54 shadow-md">
       <div className="p-6">
         <ul className="space-y-4">
           <li
-            className="text-lg font-medium group bg-amber-500 text-white hover:bg-amber-400 p-2 rounded-md cursor-pointer flex items-center"
+            className="text-lg font-medium group bg-amber-500 text-white hover:bg-amber-400 p-2 rounded-md cursor-pointer flex justify-center items-center"
             onClick={() => onSelect("createFolder")}
           >
             CREATE FOLDER
           </li>
           <li
-            className="text-lg font-medium group bg-amber-500 text-white hover:bg-amber-400 p-2 rounded-md cursor-pointer flex items-center"
+            className="text-lg font-medium group bg-amber-500 text-white hover:bg-amber-400 p-2 rounded-md cursor-pointer flex justify-center"
             onClick={() => onSelect("uploadFile")}
           >
             UPLOAD FILE
+          </li>
+          <li
+            className="text-lg font-medium group bg-amber-500 text-white hover:bg-amber-400 p-2 rounded-md cursor-pointer flex items-center"
+            onClick={() => onSelect("serviceEngineer")}
+          >
+            SERVICE ENGINEER
           </li>
         </ul>
       </div>
