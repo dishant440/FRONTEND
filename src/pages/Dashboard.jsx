@@ -168,7 +168,7 @@ const Dashboard = () => {
               <ServiceEngineerForm onClose={() => setServiceEngineer(false)} />
             </div>
           )}
-          {!serviceEngineer && (<MainComponent setParentFolderId={setParentFolderId} />)
+          {!serviceEngineer && !fileUpload && (<MainComponent setParentFolderId={setParentFolderId} />)
 
           }
         </div>
