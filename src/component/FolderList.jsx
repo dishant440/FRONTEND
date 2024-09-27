@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Loading, File, Folder } from "./Index";
+import { Loading, File, Folder, Error } from "./Index";
 import EditFolder from "./EditFolder";
 import { useHooks } from "../hooks";
 
@@ -81,7 +81,9 @@ const FolderList = ({ setParentFolderId,refreshKey }) => {
   return (
     <div className="p-10 flex flex-col gap-4">
       {currentContent?.Folders?.length === 0 && currentContent?.Files?.length === 0 ? (
-        <div className="flex justify-center text-2xl mt-10">Empty</div>
+        <div className="mr-28">
+          <div className="flex justify-center text-2xl mt-10 mr-5"><Error message="Empty"/></div>
+        </div>
       ) : (
         <>
           {/* Render Folders */}

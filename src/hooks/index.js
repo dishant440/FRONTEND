@@ -7,64 +7,7 @@ export const useHooks = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
 
-
-  // const uploadFile = async (file, parentFolderId) => {
-  //   if (!file) return;
-
-  //   setLoading(true);
-  //   setError("");
-
-  //   const formData = new FormData();
-  //   formData.append("file", file);
-  //   formData.append("parentFolderId", parentFolderId); // Send parentFolderId if needed
-
-  //   try {
-  //     await axios.post("http://192.168.29.65:7000/api/file/upload", formData, {
-  //       headers: {
-  //         "Content-Type": "multipart/form-data",
-  //       },
-  //     });
-  //     toast.success("File uploaded successfully!");
-  //   } catch (err) {
-  //     console.log(err.message);
-      
-  //     setError("Error uploading file");
-  //     toast.error("Error uploading file");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-  // const uploadFile = async (file, folderId) => {
-  //   if (!file) return;
-  //   console.log("folderId : "+folderId);
-    
-  //   setLoading(true);
-  //   setError("");
-  //   const toastId  = toast.loading("Uploading file...")
-  //   const formData = new FormData();
-  //   formData.append("file", file);
-  //   formData.append("folderId", folderId); // Change parentFolderId to folderId
-  //   const token = localStorage.getItem("token")
-    
-  //   try {
-  //     await axios.post("http://192.168.29.65:7000/api/file/upload", formData, {
-  //       headers: {
-  //         "Content-Type": "multipart/form-data",
-  //         Authorization:`Bearer ${token}`
-  //       },
-  //     });
-  //     // toast.success("File uploaded successfully!");
-  //     toast.success(toastId,)
-  //   } catch (err) {
-  //     console.log(err.message);
-  
-  //     setError("Error uploading file");
-  //     toast.error("Error uploading file");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-  const uploadFile = async (file, folderId) => {
+  const uploadFile = async (file, folderId, modelNo) => {
   if (!file) return;
   console.log("folderId : " + folderId);
 
@@ -77,8 +20,11 @@ export const useHooks = () => {
   const formData = new FormData();
   formData.append("file", file);
   formData.append("folderId", folderId); // Send folderId
+  formData.append("modelNo",modelNo)
   
   const token = localStorage.getItem("token");
+  console.log("form-data : ",formData);
+  
   
   try {
     // Make the POST request to the backend API
