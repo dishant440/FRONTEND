@@ -43,8 +43,8 @@ export const useHooks = () => {
       autoClose: 3000, // Close after 3 seconds
     });
 
-  } catch (err) {
-    console.error(err.message);
+  } catch (error) {
+    console.error(error.message);
 
     // Update the toast to show an error message if the upload fails
     toast.update(toastId, {

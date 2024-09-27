@@ -12,7 +12,7 @@ export const useServiceEngineer = () => {
     setError("");
     const token = localStorage.getItem("token");
     try {
-        const response = await axios.get("http://192.168.29.65:7000/api/getServiceEngineer",{
+        const response = await axios.get("http://192.168.29.65:7000/api/getServiceEngineers",{
             headers:{
                 Authorization:`Bearer ${token}`
             }
@@ -26,7 +26,7 @@ export const useServiceEngineer = () => {
     }finally {
         setLoading(false);
       }
-    return {loading, error, getServiceEngineer}
+   
   }
 
   const addServiceEngineer = async (engineerData) => {
@@ -45,8 +45,8 @@ export const useServiceEngineer = () => {
       
       toast.success("Service Engineer added successfully!"); 
       return response.data; 
-    } catch (err) {
-      setError(err.response?.data?.message || "Failed to add service engineer");
+    } catch (error) {
+      setError(error.response?.data?.message || "Failed to add service engineer");
       toast.error(error || "Failed to add service engineer"); 
     } finally {
       setLoading(false);
@@ -54,6 +54,7 @@ export const useServiceEngineer = () => {
   };
 
   return {
+    getServiceEngineer,
     addServiceEngineer,
     loading,
     error,

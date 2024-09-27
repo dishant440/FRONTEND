@@ -5,32 +5,38 @@ const Sidebar = React.memo(({ onSelect }) => {
   console.log("SIDEBAR RE RENDERS");
   
   return (
-    <div className=" top-[4rem] left-0 h-full bg-black pt-5 text-white w-54 shadow-md">
+    <div className=" top-[4rem] left-0 h-full bg-black pt-5 text-white w-54 shadow-md ">
       <div className="p-6">
         <ul className="space-y-4">
           <li
-            className="text-lg font-medium group bg-amber-500 text-white hover:bg-amber-400 p-2 rounded-md cursor-pointer flex justify-center items-center"
+            className="text-md font-medium group bg-amber-500 text-white hover:bg-amber-400 p-2 rounded-md cursor-pointer flex justify-center items-center"
             onClick={() => onSelect("createFolder")}
           >
             CREATE FOLDER
           </li>
           <li
-            className="text-lg font-medium group bg-amber-500 text-white hover:bg-amber-400 p-2 rounded-md cursor-pointer flex justify-center"
+            className="text-md font-medium group bg-amber-500 text-white hover:bg-amber-400 p-2 rounded-md cursor-pointer flex justify-center"
             onClick={() => onSelect("uploadFile")}
           >
             UPLOAD FILE
           </li>
           <li
-            className="text-lg font-medium group bg-amber-500 text-white hover:bg-amber-400 p-2 rounded-md cursor-pointer flex items-center"
-            onClick={() => onSelect("serviceEngineer")}
+            className="text-md font-medium group bg-amber-500 text-white hover:bg-amber-400 p-2 rounded-md cursor-pointer flex items-center"
+            onClick={() => onSelect("addServiceEngineer")}
           >
-            SERVICE ENGINEER
+            ADD SERVICE ENGINEER
           </li>
           <li
-            className="text-lg font-medium group bg-amber-500 text-white hover:bg-amber-400 p-2 rounded-md cursor-pointer flex items-center"
-            onClick={() => onSelect("assignedEngineer")}
+            className="text-md font-medium group bg-amber-500 text-white hover:bg-amber-400 p-2 rounded-md cursor-pointer flex items-center"
+            onClick={() => onSelect("showServiceEngineer")}
           >
-            ASSIGNED ENGINEER
+            SHOW SERVICE ENGINEER
+          </li>
+          <li
+            className="text-md font-medium group bg-amber-500 text-white hover:bg-amber-400 p-2 rounded-md cursor-pointer flex justify-center items-center"
+            onClick={() => onSelect("duMap")}
+          >
+            DU MAP
           </li>
         </ul>
       </div>

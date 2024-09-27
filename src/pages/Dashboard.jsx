@@ -98,13 +98,15 @@ import FolderForm from "../component/FolderForm";
 import UploadFileForm from "../component/UploadFileForm";
 import ServiceEngineerForm from "../component/ServiceEngineerForm"; // Import the new form
 import axios from "axios";
+import ServiceEngineerList from "../component/ServiceEngineerList";
 
 const Dashboard = () => {
   const [showFolderForm, setShowFolderForm] = useState(false);
   const [parentFolderId, setParentFolderId] = useState("");
   const [folders, setFolders] = useState([]); 
   const [fileUpload, setFileUpload] = useState(false);
-  const [serviceEngineer, setServiceEngineer] = useState(false); // Track Service Engineer form visibility
+  const [serviceEngineer, setServiceEngineer] = useState(false); 
+  const [serviceEngineerList,setServiceEngineerList] = useState(false)
 
   // Function to fetch folder data
   const fetchFolderData = useCallback(async (folderId) => {
@@ -129,8 +131,11 @@ const Dashboard = () => {
       setShowFolderForm(true);
     } else if (action === "uploadFile") {
       setFileUpload(true);
-    } else if (action === "serviceEngineer") {
+    } else if (action === "addServiceEngineer") {
       setServiceEngineer(true); 
+    }
+    else if (action === "showServiceEngineer"){
+      setServiceEngineerList(true);
     }
   }, []);
 
@@ -168,9 +173,11 @@ const Dashboard = () => {
               <ServiceEngineerForm onClose={() => setServiceEngineer(false)} />
             </div>
           )}
-          {!serviceEngineer && !fileUpload && (<MainComponent setParentFolderId={setParentFolderId} />)
 
-          }
+          {serviceEngineerList && (<ServiceEngineerList/>)}
+
+          {!serviceEngineer && !fileUpload && !serviceEngineerList && (<MainComponent setParentFolderId={setParentFolderId} />)}
+
         </div>
       </div>
     </div>
