@@ -26,6 +26,12 @@ const Sidebar = React.memo(({ onSelect }) => {
           >
             SERVICE ENGINEER
           </li>
+          <li
+            className="text-lg font-medium group bg-amber-500 text-white hover:bg-amber-400 p-2 rounded-md cursor-pointer flex items-center"
+            onClick={() => onSelect("assignedEngineer")}
+          >
+            ASSIGNED ENGINEER
+          </li>
         </ul>
       </div>
     </div>
