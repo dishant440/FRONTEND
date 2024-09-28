@@ -11,6 +11,7 @@ const Dashboard = () => {
   const [parentFolderId, setParentFolderId] = useState("");
   const [folders, setFolders] = useState([]);
   const [activeView, setActiveView] = useState("home"); // Single state to control view
+  const [showfileUpload,setshowFileUpload] = useState(false);
 
   const fetchFolderData = useCallback(async (folderId) => {
     try {
@@ -33,7 +34,9 @@ const Dashboard = () => {
       setParentFolderId(folderId);
       setShowFolderForm(true);
     } else if (action === "uploadFile") {
-      setActiveView("uploadFile"); // Change view
+      // setActiveView("uploadFile"); // Change view
+      setshowFileUpload(true)
+
     } else if (action === "addServiceEngineer") {
       setActiveView("addServiceEngineer"); // Change view
     } else if (action === "showServiceEngineer") {
@@ -66,10 +69,10 @@ const Dashboard = () => {
           )}
 
           {/* Render components based on active view */}
-          {activeView === "uploadFile" && (
+          {showfileUpload&& (
             <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
               <UploadFileForm
-                onClose={() => setActiveView("home")} // Reset view to home on close
+                onClose={() => setshowFileUpload(false)} // Reset view to home on close
                 parentFolderId={parentFolderId}
               />
             </div>

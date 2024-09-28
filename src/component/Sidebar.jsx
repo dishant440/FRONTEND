@@ -44,6 +44,13 @@ const Sidebar = React.memo(({ onSelect }) => {
           >
             DU MAP
           </li>
+          <li
+            className="text-md font-serif font-bold group bg-amber-500 text-white hover:bg-amber-400 p-2 rounded-md cursor-pointer flex justify-center items-center"
+            onClick={() => onSelect("duMap")}
+          >
+            ADD DISPENSER
+          </li>
+          
         </ul>
       </div>
     </div>
