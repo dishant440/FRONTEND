@@ -95,8 +95,8 @@ const Signin = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 />
             </div>
-                <div className="flex justify-center items-center ">
-            <Button Type="submit" value="LOG IN" classname="w-full"/>
+                <div className="flex justify-center items-center">
+            <Button Type="submit" value="LOG IN" classname="w-full "/>
 
                 </div>
           </form>

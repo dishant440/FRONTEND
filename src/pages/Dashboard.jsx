@@ -5,6 +5,7 @@ import UploadFileForm from "../component/UploadFileForm";
 import ServiceEngineerForm from "../component/ServiceEngineerForm";
 import axios from "axios";
 import ServiceEngineerList from "../component/ServiceEngineerList";
+import AddNewDispenser from "../component/AddNewDispenser";
 
 const Dashboard = () => {
   const [showFolderForm, setShowFolderForm] = useState(false);
@@ -43,6 +44,9 @@ const Dashboard = () => {
       setActiveView("serviceEngineerList"); // Change view
     } else if (action === "showHome") {
       setActiveView("home"); // Change view
+    }
+    else if(action === "addDispenser"){
+      setActiveView("addDispenser")
     }
   }, []);
 
@@ -86,6 +90,9 @@ const Dashboard = () => {
 
           {activeView === "serviceEngineerList" && (
             <ServiceEngineerList />
+          )}
+          {activeView === "addDispenser" && (
+            <AddNewDispenser/>
           )}
 
           {activeView === "home" && (
