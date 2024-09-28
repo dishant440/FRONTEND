@@ -141,6 +141,7 @@
 
 
 import React, { useState } from "react";
+import useCreateDispenser from "../hooks/useCreateDispenser"; 
 
 const AddNewDispenser = () => {
   const [duNumber, setduNumber] = useState("");
@@ -148,6 +149,9 @@ const AddNewDispenser = () => {
   const [model, setModelNo] = useState("");
   const [displayNumber, setDisplayNumber] = useState(0); // Maximum allowed display numbers
   const [newDisplay, setNewDisplay] = useState(""); // To hold the current display number input
+  const [tenderId, setTenderId] = useState("")
+
+  const { createDispenser, loading, error } = useCreateDispenser();
 
   // Function to handle adding display number
   const handleAddDisplay = (e) => {
@@ -164,19 +168,24 @@ const AddNewDispenser = () => {
     setduDisplay(duDisplay.filter((_, i) => i !== index)); // Remove display at specific index
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic
-    console.log({
+    const dispenserData = {
       duNumber,
       model,
       duDisplay,
-    });
-    // Reset form
-    setduNumber("");
-    setModelNo("");
-    setDisplayNumber(0);
-    setduDisplay([]);
+      displayNumber,
+      tenderId
+    };
+
+    await createDispenser(dispenserData); 
+
+  
+    // // Reset form
+    // setduNumber("");
+    // setModelNo("");
+    // setDisplayNumber(0);
+    // setduDisplay([]);
   };
 
   return (
@@ -202,6 +211,17 @@ const AddNewDispenser = () => {
           type="text"
           value={model}
           onChange={(e) => setModelNo(e.target.value)}
+          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500  text-black"
+          required
+        />
+      </div>
+       {/* Tender Id */}
+       <div className="grid grid-cols-1 gap-2">
+        <label className="block text-sm font-bold ">Tender Id:</label>
+        <input
+          type="text"
+          value={tenderId}
+          onChange={(e) => setTenderId(e.target.value)}
           className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500  text-black"
           required
         />
@@ -260,12 +280,15 @@ const AddNewDispenser = () => {
 
       {/* Submit Button */}
       <div className="flex justify-end">
-        <button
+        {/* <button
           type="submit"
           className="px-6 py-3 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 transition"
         >
           ADD DISPENSER
-        </button>
+        </button> */}
+         <button type="submit" disabled={loading} className="px-6 py-3 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 transition">
+          {loading ? "Creating..." : "ADD DISPENSER"}
+      </button>
       </div>
     </form>
   );
