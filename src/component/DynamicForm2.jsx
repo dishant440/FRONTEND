@@ -19,13 +19,17 @@ const ServiceEngineerForm = () => {
   // Fetch service engineers based on input
   const handleSubmit = async () =>{
     const payload = {
-        serviceEngineerEmail: selectedEngineer,
+        serviceEngineer: selectedEngineer,
         duNumber: duNumber,
         model: modelNo,
         fileName: file
       };
       try {
-        await axios.post('http://192.168.29.65:7000/api/add-du-map', payload);
+        await axios.post('http://192.168.29.65:7000/api/add-du-map', payload,{
+            headers:{
+                Authorization:`Bearer ${localStorage.getItem("token")}`
+            }
+        });
         toast.success("DU Map added successfully!", {
           position: "top-right",
           autoClose: 2000,
@@ -193,7 +197,9 @@ const ServiceEngineerForm = () => {
       >
         Submit
       </button>
+    <ToastContainer/>
     </div>
+    
   );
 };
 

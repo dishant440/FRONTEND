@@ -142,6 +142,8 @@
 
 import React, { useState } from "react";
 import useCreateDispenser from "../hooks/useCreateDispenser"; 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddNewDispenser = () => {
   const [duNumber, setduNumber] = useState("");
@@ -189,6 +191,7 @@ const AddNewDispenser = () => {
   };
 
   return (
+    <>
     <form onSubmit={handleSubmit} className="p-8 bg-black text-white shadow-lg rounded-md max-w-lg mx-auto grid gap-4 my-36">
       <h2 className="text-2xl flex mx-auto font-semibold mb-6">ADD NEW DISPENSER</h2>
       
@@ -291,6 +294,8 @@ const AddNewDispenser = () => {
       </button>
       </div>
     </form>
+    <ToastContainer position="top-center"/>
+    </>
   );
 };
 

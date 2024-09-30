@@ -30,7 +30,7 @@ const User = () => {
                 <span className="text-white my-1 font-bold">{user}</span>
             </div>
             {showConfirm && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                <div className="fixed inset-0 z-80 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white p-5 rounded shadow-lg">
                         <h2 className="text-lg font-bold">Are you sure you want to logout?</h2>
                         <div className="flex justify-between mt-4">

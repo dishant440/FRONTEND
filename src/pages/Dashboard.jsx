@@ -7,6 +7,9 @@ import axios from "axios";
 import ServiceEngineerList from "../component/ServiceEngineerList";
 import AddNewDispenser from "../component/AddNewDispenser";
 import DynamicForm2 from "../component/DynamicForm2";
+import DUMaplist from "../component/DuMaplist"
+
+
 
 const Dashboard = () => {
   const [showFolderForm, setShowFolderForm] = useState(false);
@@ -27,6 +30,7 @@ const Dashboard = () => {
   }, []);
 
   // Function to refresh folder list
+  
   const refreshFolderList = useCallback(() => {
     fetchFolderData(parentFolderId);
   }, [parentFolderId, fetchFolderData]);
@@ -52,6 +56,9 @@ const Dashboard = () => {
     else if (action === "duMap"){
       setActiveView("duMap")
     }
+    else if (action === "showDUMap"){
+      setActiveView("showDUMap")
+    }
   }, []);
 
   useEffect(() => {
@@ -67,23 +74,23 @@ const Dashboard = () => {
         </div>
         <div className="flex-1 bg-gray-100">
           {showFolderForm && (
-            <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
-              <FolderForm 
-                parentFolderId={parentFolderId} 
-                onClose={() => setShowFolderForm(false)} 
-                onFolderCreated={refreshFolderList}
-              />
-            </div>
+            <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <FolderForm
+              parentFolderId={parentFolderId}
+              onClose={() => setShowFolderForm(false)}
+              onFolderCreated={refreshFolderList}
+            />
+          </div>
           )}
 
           {/* Render components based on active view */}
           {showfileUpload&& (
-            <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
-              <UploadFileForm
-                onClose={() => setshowFileUpload(false)} // Reset view to home on close
-                parentFolderId={parentFolderId}
-              />
-            </div>
+             <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
+             <UploadFileForm
+               onClose={() => setshowFileUpload(false)}
+               parentFolderId={parentFolderId}
+             />
+           </div>
           )}
 
           {activeView === "addServiceEngineer" && (
@@ -103,6 +110,7 @@ const Dashboard = () => {
           {activeView === "home" && (
             <MainComponent setParentFolderId={setParentFolderId} />
           )}
+          {activeView === "showDUMap" && (<DUMaplist/>)}
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@ const useCreateDispenser = () => {
     
     setLoading(true);
     setError(null);
+    const toastId = toast.loading("Creating New DU");
     try {
         const token = localStorage.getItem("token")
         console.log("token : "+token);
@@ -24,11 +25,21 @@ const useCreateDispenser = () => {
         
       });
       
-      toast.success("Dispenser created successfully!"); 
+      toast.update(toastId,{
+        render: "DU created Successfully",
+        type: "success",
+        isLoading: false,
+        autoClose: 2000,
+      }); 
       return response.data;
     } catch (err) {
       setError(err.response?.data?.message || "Failed to create dispenser");
-      toast.error(err.response?.data?.message || "Failed to create dispenser"); 
+      toast.update(toastId, {
+        render: error.response?.data?.message || "Error creating DU",
+        type: "error",
+        isLoading: false,
+        autoClose: 2000,
+      });
     } finally {
       setLoading(false);
     }
