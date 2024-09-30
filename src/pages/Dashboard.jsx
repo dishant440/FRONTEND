@@ -8,7 +8,7 @@ import ServiceEngineerList from "../component/ServiceEngineerList";
 import AddNewDispenser from "../component/AddNewDispenser";
 import DynamicForm2 from "../component/DynamicForm2";
 import DUMaplist from "../component/DuMaplist"
-
+import DispenserDetails from "../component/DispenseDetail";
 
 
 const Dashboard = () => {
@@ -59,6 +59,9 @@ const Dashboard = () => {
     else if (action === "showDUMap"){
       setActiveView("showDUMap")
     }
+    else if(action === "dispenserDetails"){
+      setActiveView("dispenserDetails")
+    }
   }, []);
 
   useEffect(() => {
@@ -85,12 +88,12 @@ const Dashboard = () => {
 
           {/* Render components based on active view */}
           {showfileUpload&& (
-             <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
-             <UploadFileForm
-               onClose={() => setshowFileUpload(false)}
-               parentFolderId={parentFolderId}
-             />
-           </div>
+              <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
+              <UploadFileForm
+                onClose={() => setshowFileUpload(false)}
+                parentFolderId={parentFolderId}
+              />
+            </div>
           )}
 
           {activeView === "addServiceEngineer" && (
@@ -111,6 +114,8 @@ const Dashboard = () => {
             <MainComponent setParentFolderId={setParentFolderId} />
           )}
           {activeView === "showDUMap" && (<DUMaplist/>)}
+          {activeView === "dispenserDetails" && <DispenserDetails />}
+
         </div>
       </div>
     </div>
