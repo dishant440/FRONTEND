@@ -6,6 +6,7 @@ import ServiceEngineerForm from "../component/ServiceEngineerForm";
 import axios from "axios";
 import ServiceEngineerList from "../component/ServiceEngineerList";
 import AddNewDispenser from "../component/AddNewDispenser";
+import DynamicForm2 from "../component/DynamicForm2";
 
 const Dashboard = () => {
   const [showFolderForm, setShowFolderForm] = useState(false);
@@ -47,6 +48,9 @@ const Dashboard = () => {
     }
     else if(action === "addDispenser"){
       setActiveView("addDispenser")
+    }
+    else if (action === "duMap"){
+      setActiveView("duMap")
     }
   }, []);
 
@@ -94,6 +98,7 @@ const Dashboard = () => {
           {activeView === "addDispenser" && (
             <AddNewDispenser/>
           )}
+          {activeView === "duMap" && (<DynamicForm2/>)}
 
           {activeView === "home" && (
             <MainComponent setParentFolderId={setParentFolderId} />

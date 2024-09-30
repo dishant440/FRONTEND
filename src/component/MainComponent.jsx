@@ -82,7 +82,7 @@ const MainComponent = ({ setParentFolderId }) => {
       {showUploadForm && (
         <UploadFileForm 
           onClose={() => setShowUploadForm(false)} 
-          parentFolderNames={parentFolderNames} // Pass the parent folder names
+          parentFolderId={setParentFolderId} 
         />
       )}
     </div>
