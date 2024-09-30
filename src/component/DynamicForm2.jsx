@@ -1,5 +1,9 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const ServiceEngineerForm = () => {
   const [engineers, setEngineers] = useState([]); // List of service engineers
@@ -7,12 +11,43 @@ const ServiceEngineerForm = () => {
   const [duNumber, setDuNumber] = useState(''); // DU number input
   const [duSuggestions, setDuSuggestions] = useState([]); // Suggestions for DU number
   const [modelNo, setModelNo] = useState(''); // Model number auto-filled
-  const [files, s] = useState([]); // Files based on modelNo
+  const [files, setfiles] = useState([]); // Files based on modelNo
   const [file,Name] = useState("")
   console.log(files);
   
 
   // Fetch service engineers based on input
+  const handleSubmit = async () =>{
+    const payload = {
+        serviceEngineerEmail: selectedEngineer,
+        duNumber: duNumber,
+        model: modelNo,
+        fileName: file
+      };
+      try {
+        await axios.post('http://192.168.29.65:7000/api/add-du-map', payload);
+        toast.success("DU Map added successfully!", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,  
+          draggable: true,
+          progress: undefined,
+        });
+      } catch (error) {
+        console.error("Error adding DU map:", error);
+        toast.error("Failed to add DU Map.", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+  }
   const fetchEngineers = async (name) => {
     const response = await axios.get(`http://192.168.29.65:7000/api/serviceEngineer?name=${name}`);
     setEngineers(response.data);
@@ -31,7 +66,7 @@ const ServiceEngineerForm = () => {
   // Fetch files based on modelNo
   const fetchFiles = async (modelNo) => {
     const response = await axios.get(`http://192.168.29.65:7000/api/fileByModelNo?modelNo=${modelNo}`);
-    s(response.data.files); 
+    setfiles(response.data.files); 
   };
 
   useEffect(() => {
@@ -143,7 +178,7 @@ const ServiceEngineerForm = () => {
             value={file}
             onChange={(e)=>Name(e.target.value)}
             >
-                <option value="" className='p-4' disabled>Select File</option>
+                <option value="" className='' disabled>Select File</option>
                 {files.map((file,index)=>(
                 <option key={index} value={file.fileName}>
                     {file.fileName}
@@ -152,6 +187,12 @@ const ServiceEngineerForm = () => {
                 )}
             </select>
       </div>
+      <button
+        onClick={handleSubmit}
+        className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Submit
+      </button>
     </div>
   );
 };
