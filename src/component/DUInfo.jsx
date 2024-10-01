@@ -27,20 +27,20 @@ import React, { memo } from "react";
 import Button from "./Button"; 
 
 const DUInfo = memo(({ duMap }) => {
-  const { name, duNumber, model, fileName } = duMap; 
+  const { name, duNumber, model, displayNumber } = duMap; 
 
   return (
-    <div className="du-map-row grid grid-cols-4 gap-4 items-center bg-gray-100 p-4 border-b border-gray-300 hover:shadow-md">
-      <div className="flex items-center gap-4">
+    <div className="du-map-row flex flex-row justify-between items-center bg-gray-100 p-4 border-b border-gray-300 hover:shadow-md">
+      <div className="flex items-center gap-6">
         <img src="/userIcon.png" alt="User Icon" className="w-10 h-10" /> 
         <span className="font-bold">{name}</span>
       </div>
       <div className="font-bold">{duNumber}</div>
       <div className="font-bold">{model}</div>
-      <div className="flex items-center gap-2">
-        <img src="/fileIcon.png" alt="File Icon" className="w-6 h-6" /> 
-        <span className="font-bold">{fileName}</span>
-      </div>
+      {/* <div className="flex items-center gap-2"> */}
+      
+        <span className="font-bold mr-10">{displayNumber}</span>
+      {/* </div> */}
     </div>
   );
 });

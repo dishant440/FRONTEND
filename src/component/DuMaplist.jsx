@@ -106,19 +106,21 @@ const DUMapList = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="p-10">
+    <div className="p-10 ">
       <h2 className="text-3xl font-bold mb-6 text-center">DU MAP DETAILS</h2>
-      <div className="grid grid-cols-4 text-lg bg-black text-amber-400 font-bold p-4">
-        <div className="ml-5">NAME</div>
+      <div className="flex flex-row justify-between text-lg bg-black text-amber-400 font-bold p-4 ">
+        <div className="ml-10">NAME</div>
         <div>DU NUMBER</div>
         <div className="ml-5">MODEL</div>
-        <div className="ml-20">FILE</div>
+        <div className="mr-10">DISPLAY NO</div>
       </div>
-      {duMaps.length === 0 ? (
+     <div className="flex flex-col gap-4">
+     {duMaps.length === 0 ? (
         <Error message="Not found" />
       ) : (
         duMaps.map((duMap, index) => <DUInfo key={index} duMap={duMap} />)
       )}
+     </div>
     </div>
   );
 };
