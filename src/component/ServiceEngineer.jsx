@@ -62,7 +62,7 @@ import Button from "./Button";
 // export default React.memo(ServiceEngineer);
 
 
-const ServiceEngineer = memo(({ engineer }) => {
+const ServiceEngineer = memo(({ engineer, onClick }) => {
     const { name, email, phoneNo } = engineer;
     console.log("ServiceEngineer RE RENDERS");
   
@@ -78,7 +78,7 @@ const ServiceEngineer = memo(({ engineer }) => {
         </div>
         <div className="right-side flex flex-row items-center justify-end" style={{ width: "30%" }}>
           
-          <Button value="DELETE" classname="mr-2" />
+          <Button value="DELETE" classname="mr-2" onClick={onClick}/>
         </div>
       </div>
     );

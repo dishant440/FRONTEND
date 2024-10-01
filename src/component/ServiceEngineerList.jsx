@@ -2,12 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useServiceEngineer } from "../hooks/useServiceEngineer"; // Custom hook
 import ServiceEngineer from "./ServiceEngineer"; // Engineer component
 import Error from "./Error"; // Error handling component
+import Loading from "./Loading";
 
 const ServiceEngineerList = () => {
-  const { getServiceEngineer } = useServiceEngineer(); // Fetch service engineers from hook
+  const { getServiceEngineer,deleteServiceEngineer } = useServiceEngineer(); // Fetch service engineers from hook
   const [engineers, setEngineers] = useState([]); // List of engineers
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
+
+
+  const handleDelete = async (id) => {
+    await deleteServiceEngineer(id)
+  }
 
   useEffect(() => {
     const fetchEngineers = async () => {
@@ -21,11 +27,11 @@ const ServiceEngineerList = () => {
       }
     };
 
-    fetchEngineers(); // Call fetch function on component mount
+    fetchEngineers(); 
   }, []);
 
-  if (loading) return <div>Loading service engineers...</div>; // Show loading state
-  if (error) return <div><Error message="No Data Available"/></div>; // Show error if any
+  if (loading) return <div><Loading /></div>; 
+  if (error) return <div><Error message="No Data Available"/></div>;
 
   return (
     <div className="service-engineer-list p-10 flex flex-col gap-4">
@@ -39,7 +45,7 @@ const ServiceEngineerList = () => {
         <div><Error message="No service engineers found" /></div>
       ) : (
         engineers.map((engineer, index) => (
-          <ServiceEngineer key={index} engineer={engineer} />
+          <ServiceEngineer key={index} engineer={engineer} onClick={handleDelete(engineer._id)}/>
         ))
       )}
     </div>

@@ -93,11 +93,11 @@ const File = memo(({ fileName, dateOfCreation, onClick }) => {
     const formattedTime = formatTime(dateOfCreation);
     const formattedDate = formatDate(dateOfCreation);
 
-    // Function to handle the delete button click
+   
     const handleDeleteClick = () => {
        
         if (onClick) {
-            onClick(); // Call the onClick function passed from the parent
+            onClick(); 
         }
     };
 
@@ -110,7 +110,6 @@ const File = memo(({ fileName, dateOfCreation, onClick }) => {
             <div className="right-side flex flex-row items-center justify-center gap-8">
                 <span className="font-bold mr-14">{formattedTime + " IST"}</span>
                 <span className="font-bold mr-2">{formattedDate}</span>
-                <span><Button value="EDIT" classname="mb-2" /></span>
                 <span>
                     <Button onClick={handleDeleteClick} value="DELETE" classname="mb-2" />
                 </span>
