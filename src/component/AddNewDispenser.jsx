@@ -189,7 +189,7 @@ const AddNewDispenser = () => {
   return (
     <>
     <form onSubmit={handleSubmit} className="p-8 bg-black text-white shadow-lg rounded-md max-w-lg mx-auto grid gap-4 my-36">
-      <h2 className="text-2xl flex mx-auto font-semibold mb-6">ADD NEW DISPENSER</h2>
+      <h2 className="text-2xl flex text-amber-500 mx-auto font-semibold mb-6">ADD NEW DISPENSER</h2>
       
       {/* DU Number */}
       <div className="grid grid-cols-1 gap-2">
@@ -257,7 +257,7 @@ const AddNewDispenser = () => {
             <button
               type="button"
               onClick={handleAddDisplay}
-              className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition text-black"
+              className="px-4 py-2 bg-amber-500 text-white font-semibold rounded-md hover:bg-amber-400 transition text-black"
             >
               Add
             </button>
@@ -289,7 +289,7 @@ const AddNewDispenser = () => {
         >
           ADD DISPENSER
         </button> */}
-         <button type="submit" disabled={loading} className="px-6 py-3 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 transition">
+         <button type="submit" disabled={loading} className="px-6 py-3 bg-amber-500 text-white font-bold rounded-md hover:bg-amber-400 flex  mx-auto transition">
           {loading ? "Creating..." : "ADD DISPENSER"}
       </button>
       </div>
