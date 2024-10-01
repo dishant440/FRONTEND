@@ -32,11 +32,14 @@ export const useServiceEngineer = () => {
    
     const toastId = toast.loading('Deleting .....')
     try {
-      const response = await axios.delete(`/api/deleteServiceEngineer/${id}`, {
+      const response = await axios.delete(`http://192.168.29.65:7000/api/deleteServiceEngineer/${id}`, {
         headers:{
           Authorization:`Bearer ${localStorage.getItem("token")}`
         }
+        
       });
+      console.log(id);
+      
       toast.update(toastId,{
         render:"Deleted successfully",
         type:"success",
@@ -44,7 +47,7 @@ export const useServiceEngineer = () => {
         autoClose:2000,
       })  
       
-    } catch (err) {
+    } catch (error) {
       toast.update(toastId,{
         render:"Error Deleting",
         type:"error",
