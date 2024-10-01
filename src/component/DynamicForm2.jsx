@@ -248,6 +248,20 @@ const ServiceEngineerForm = () => {
   console.log("files",files);
 
   const handleSubmit = async () => {
+
+    if (!selectedEngineer || !duNumber || !modelNo || !file || !displayNumber || !fileId) {
+      toast.error("Please fill out all required fields.", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return; // Stop form submission if validation fails
+    }
+  
     console.log("Before submission:", { displayNumber }); // Check this before the payload
     const payload = {
       serviceEngineer: selectedEngineer,
@@ -346,13 +360,13 @@ const ServiceEngineerForm = () => {
 
 
   return (
-    <div className="max-w-md mx-auto border rounded-lg shadow-md bg-white mt-36 p-10">
-      <h3 className="text-lg font-semibold mb-4 mx-auto">DU MAP</h3>
+    <div className="max-w-md mx-auto border rounded-lg shadow-md bg-black mt-36 p-10">
+      <h3 className="text-xl text-white flex justify-center font-semibold mb-4 mx-auto">DU MAP</h3>
 
 
 {/* Service Engineer Search Field */}
 <div className="mb-4 relative"> {/* Add relative positioning here */}
-  <label className="block text-sm font-medium text-gray-700">Service Engineer:</label>
+  <label className="block text-sm font-medium text-white">Service Engineer:</label>
   <input
     type="text"
     value={selectedEngineer}
@@ -360,7 +374,7 @@ const ServiceEngineerForm = () => {
     className="mt-1 p-2 border border-gray-300 rounded-md w-full"
   />
   {engineers.length > 0 && (
-    <ul className="border border-gray-300 bg-gray-200 rounded-md mt-1 max-h-40 overflow-y-auto z-10 absolute w-full"> {/* Adjusted position */}
+    <ul className="border border-gray-300 bg-gray-200  rounded-md mt-1 max-h-40 overflow-y-auto z-10 absolute w-full"> {/* Adjusted position */}
       {engineers.map((engineer, index) => (
         <li
           key={index}
@@ -368,7 +382,7 @@ const ServiceEngineerForm = () => {
             setSelectedEngineer(engineer.name);
             setEngineers([]); // Clear engineers suggestions after selection
           }}
-          className="p-2 hover:bg-gray-100 cursor-pointer"
+          className="p-2 hover:bg-gray-100 cursor-pointer text-white"
         >
           {engineer.name}
         </li>
@@ -380,7 +394,7 @@ const ServiceEngineerForm = () => {
 
 
 <div className="mb-4 relative">
-  <label className="block text-sm font-medium text-gray-700">DU Number:</label>
+  <label className="block text-sm font-medium text-white">DU Number:</label>
   <input
     type="text"
     value={duNumber}
@@ -404,7 +418,7 @@ const ServiceEngineerForm = () => {
 
       {/* DU Display select */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 ">DU Display:</label>
+        <label className="block text-sm font-medium text-white ">DU Display:</label>
         {/* <select
           id="duDisplay"
           value={displayNumber}
@@ -432,7 +446,7 @@ const ServiceEngineerForm = () => {
 
       {/* Model No Auto-filled Field */}
       <div className="mb-4 mt-4">
-        <label className="block text-sm font-medium text-gray-700">Model No:</label>
+        <label className="block text-sm font-medium text-white">Model No:</label>
         <input
           type="text"
           value={modelNo}
@@ -443,7 +457,7 @@ const ServiceEngineerForm = () => {
 
       {/* File Names Based on ModelNo */}
       <div>
-        <label className="block text-sm font-medium text-gray-700">Files:</label>
+        <label className="block text-sm font-medium text-white">Files:</label>
         <select
           id="fileName"
           value={file}
@@ -465,7 +479,7 @@ const ServiceEngineerForm = () => {
 
       <button
         onClick={handleSubmit}
-        className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        className="mt-4 flex mx-auto bg-amber-500 hover:bg-amber-400 text-white font-bold py-2 px-4 rounded"
       >
         Submit
       </button>
