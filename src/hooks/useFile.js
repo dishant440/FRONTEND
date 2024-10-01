@@ -1,17 +1,16 @@
 import { useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 // Custom hook for file operations
 const useFile = () => {
-  const [fileLoading, setfileLoading] = useState(false); // filefileLoading state for file deletion
-  const [fileerror, setfileerror] = useState(null);     // fileerror state for any issues
+
   const [success, setSuccess] = useState(false); // Success state for successful deletion
 
   // Function to delete a file by ID
   const deleteFile = async (fileId) => {
-    setfileLoading(true); // Start fileLoading
-    setfileerror(null);   // Clear previous fileerrors
-    setSuccess(false); // Clear previous success message
+   
+    const toastId = toast.loading("Deleting File ...");
 
     try {
       // Send DELETE request to the server
@@ -20,22 +19,29 @@ const useFile = () => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
+      toast.update(toastId,{
+        render:"Folder deleted successfully",
+        type:"success",
+        isLoading:false,
+        autoClose:2000,
+      })  
 
-      // If the file is successfully deleted
-      setSuccess(true);
       console.log(response.data.message); // Optional: Log the success message
 
     } catch (err) {
-      // If an fileerror occurs, set the fileerror state
-      setfileerror(err.response?.data?.message || "Failed to delete the file.");
-      console.fileerror("fileerror deleting file:", err); // Optional: Log the fileerror
 
-    } finally {
-      setfileLoading(false); // Stop fileLoading once the process is complete
-    }
+
+      toast.update(toastId, {
+        render: "Error deleting file",
+        type: "error",
+        isLoading: false,
+        autoClose: 2000, // Close after 5 seconds
+      });
+
+    } 
   };
 
-  return { deleteFile, fileLoading, fileerror, success };
+  return { deleteFile };
 };
 
 export default useFile;
