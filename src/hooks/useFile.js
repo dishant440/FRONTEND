@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 // Custom hook for file operations
 const useFile = () => {
 
-  const [success, setSuccess] = useState(false); // Success state for successful deletion
 
   // Function to delete a file by ID
   const deleteFile = async (fileId) => {
@@ -14,7 +13,7 @@ const useFile = () => {
 
     try {
       // Send DELETE request to the server
-      const response = await axios.delete(`http://192.168.29.65:7000/api/file/${fileId}`, {
+      const response = await axios.delete(`http://192.168.29.65:7000/api/deleteFile/${fileId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

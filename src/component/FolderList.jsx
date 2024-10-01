@@ -27,7 +27,7 @@ const FolderList = ({ setParentFolderId,refreshKey }) => {
   const [showEditForm,setShowFolderForm] = useState(false);
   const {deleteFolder} = useHooks();
   const [folders, setFolders] = useState([]); // State to hold folders data
-  const { deleteFile,fileLoading,fileerror, success } = useFile();
+  const { deleteFile } = useFile();
   
 
   useEffect(() => {
@@ -39,11 +39,10 @@ const FolderList = ({ setParentFolderId,refreshKey }) => {
     setShowFolderForm(true)
   };
 
-  const handleDelete =async (fileId) => {
-   
-    await deleteFile(fileId);
-       
-  };
+  const handleDelete = (fileId) => {
+
+    deleteFile(fileId); // Ensure deleteFile function exists
+};
 
 
 
@@ -121,8 +120,13 @@ const FolderList = ({ setParentFolderId,refreshKey }) => {
 
           {/* Render Files */}
           {currentContent.Files?.map((file) => (
-            <File key={file._id} fileName={file.fileName} dateOfCreation={file.dateOfCreation}  onClick={() => handleDelete(file._id)} />
-          ))}
+    <File 
+        key={file._id} 
+        fileName={file.fileName} 
+        dateOfCreation={file.dateOfCreation}  
+        onClick={() => handleDelete(file._id)} // Pass the file ID
+    />
+))}
         </>
       )}
     </div>
