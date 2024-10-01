@@ -48,7 +48,7 @@ const FolderList = ({ setParentFolderId,refreshKey }) => {
 
     try {
       const response = await axios.get(
-        id ? `http://localhost:7000/api/content/${id}` : `http://localhost:7000/api/allContent`
+        id ? `http://192.168.29.65:7000/api/content/${id}` : `http://192.168.29.65:7000/api/allContent`
       );
       setCurrentContent(response.data);
       setFolders(response.data)

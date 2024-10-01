@@ -30,7 +30,7 @@ const Signin = () => {
       }
     
       try {
-        const response = await axios.post("http://localhost:7000/api/login", {
+        const response = await axios.post("http://192.168.29.65:7000/api/login", {
           email,
           password
         });

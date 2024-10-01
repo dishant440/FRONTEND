@@ -70,7 +70,7 @@ export const useHooks = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.post("http://localhost:7000/api/createFolder", {
+      const response = await axios.post("http://192.168.29.65:7000/api/createFolder", {
         folderName,
         parentFolderId,
       }, {
@@ -106,7 +106,7 @@ export const useHooks = () => {
     const toastId = toast.loading("Editing Folder");
 
       try {
-        const response = await axios.put("http://localhost:7000/api/editFolder",{
+        const response = await axios.put("http://192.168.29.65:7000/api/editFolder",{
           newName,
           folderId
         });
@@ -138,7 +138,7 @@ export const useHooks = () => {
         const toastId = toast.loading("Deleting Folder ...");
         
         try {
-          const response = await axios.delete(`http://localhost:7000/api/deleteFolder/${id}`,{
+          const response = await axios.delete(`http://192.168.29.65:7000/api/deleteFolder/${id}`,{
             headers: {
               Authorization:`Bearer ${token}`
             }

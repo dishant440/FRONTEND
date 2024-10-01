@@ -21,7 +21,7 @@ const Dashboard = () => {
   const fetchFolderData = useCallback(async (folderId) => {
     try {
       const response = await axios.get(
-        folderId ? `http://localhost:7000/api/content/${folderId}` : `http://localhost:7000/api/allContent`
+        folderId ? `http://192.168.29.65:7000/api/content/${folderId}` : `http://192.168.29.65:7000/api/allContent`
       );
       setFolders(response.data);
     } catch (error) {
