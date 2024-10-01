@@ -26,7 +26,7 @@ const DispenserDetails = memo(() => {
   return (
     <div className="dispenser-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-8 ">
       {dispenserData.length === 0 ? (
-        <Error message="NO DATA AVAILABLE" />
+        <div className="flex"><Error message="NO DATA AVAILABLE" /></div>
       ) : (
         dispenserData.map((dispenser) => (
           <div key={dispenser.duNumber} className="dispenser-card rounded-xl shadow-lg p-6 bg-black text-white border border-gray-100 transform hover:scale-105 transition-transform duration-300 ease-in-out">

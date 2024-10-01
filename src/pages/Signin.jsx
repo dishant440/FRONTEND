@@ -95,7 +95,9 @@ const Signin = () => {
                 name="password"
                 Value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                />
+            />
+
+                
             </div>
                 <div className="flex justify-center items-center">
             <Button Type="submit" value="LOG IN" classname="w-full "/>
@@ -112,5 +114,7 @@ const Signin = () => {
     </>
     )
 }
+
+
 
 export default Signin;

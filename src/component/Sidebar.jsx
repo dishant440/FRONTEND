@@ -5,7 +5,7 @@ const Sidebar = React.memo(({ onSelect }) => {
   console.log("SIDEBAR RE RENDERS");
   
   return (
-    <div className=" top-[4rem] left-0 h-full bg-black pt-5 text-white w-54 shadow-md ">
+    <div className=" top-[4rem] left-0 h-full bg-black pt-5 text-white w-54 shadow-md sticky ">
       <div className="p-6">
         <ul className="space-y-4">
         <li

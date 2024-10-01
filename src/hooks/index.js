@@ -11,8 +11,6 @@ export const useHooks = () => {
   if (!file) return;
   console.log("folderId : " + folderId);
 
-  setLoading(true);
-  setError("");
   
   // Start loading toast
   const toastId = toast.loading("Uploading file...");
@@ -44,7 +42,12 @@ export const useHooks = () => {
     });
 
   } catch (error) {
-    console.error(error.message);
+    toast.update(toastId,{
+      render: "Error uploading file Try again",
+      type: "success",
+      isLoading: false,
+      autoClose: 3000, 
+    })
 
     // Update the toast to show an error message if the upload fails
     toast.update(toastId, {
@@ -56,15 +59,11 @@ export const useHooks = () => {
     
     setError("Error uploading file");
     
-  } finally {
-    setLoading(false);
-  }
+  } 
 };
 
   const createFolder = async (folderName, parentFolderId) => {
-    setLoading(true);
-    setError(null); 
-    setSuccess(""); 
+   
     const toastId = toast.loading("Creating Folder ....");
 
 
@@ -77,15 +76,16 @@ export const useHooks = () => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });toast.update(toastId, {
+      });
+      toast.update(toastId, {
         render: "Folder created Refresh Page",
         type: "success",
         isLoading: false,
         autoClose: 2000,
       });
       
-      setSuccess("Folder created successfully");
-      // toast.success("Folder created successfully");
+ 
+   
     } catch (error) {
       const errorMsg = error.response?.data?.message || error.message;
       setError(errorMsg);
@@ -95,15 +95,12 @@ export const useHooks = () => {
         isLoading:false,
         autoClose:2000,
       })
-    } finally {
-      setLoading(false);
     }
   };
 
   const editFolder = async (newName,folderId) =>{
-      setLoading(true);
-      setError(null);
-    const toastId = toast.loading("Editing Folder");
+     
+    const toastId = toast.loading("Editing Folder ...");
 
       try {
         const response = await axios.put("http://192.168.29.65:7000/api/editFolder",{
@@ -124,17 +121,12 @@ export const useHooks = () => {
           isLoading:false,
           autoClose:2000,
         });
-      }finally{
-        setLoading(false);
       }
         
       }
 
       const deleteFolder = async (id) =>{
-        const token = localStorage.getItem("token")
-        setLoading(true);
-        setError(null); 
-     
+        const token = localStorage.getItem("token");    
         const toastId = toast.loading("Deleting Folder ...");
         
         try {
@@ -157,15 +149,13 @@ export const useHooks = () => {
             autoClose:2000,
             isLoading:false
           })
-        }finally{
-          setLoading(false);
         }
       }
     
     
       
 
-    return { createFolder, loading ,error ,success ,editFolder ,deleteFolder ,uploadFile};
+    return { createFolder, editFolder ,deleteFolder ,uploadFile};
 
 };
 
