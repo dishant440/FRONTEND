@@ -3,14 +3,14 @@ import axios from "axios";
 
 // Custom hook for file operations
 const useFile = () => {
-  const [loading, setLoading] = useState(false); // Loading state for file deletion
-  const [error, setError] = useState(null);     // Error state for any issues
+  const [fileLoading, setfileLoading] = useState(false); // filefileLoading state for file deletion
+  const [fileerror, setfileerror] = useState(null);     // fileerror state for any issues
   const [success, setSuccess] = useState(false); // Success state for successful deletion
 
   // Function to delete a file by ID
   const deleteFile = async (fileId) => {
-    setLoading(true); // Start loading
-    setError(null);   // Clear previous errors
+    setfileLoading(true); // Start fileLoading
+    setfileerror(null);   // Clear previous fileerrors
     setSuccess(false); // Clear previous success message
 
     try {
@@ -26,16 +26,16 @@ const useFile = () => {
       console.log(response.data.message); // Optional: Log the success message
 
     } catch (err) {
-      // If an error occurs, set the error state
-      setError(err.response?.data?.message || "Failed to delete the file.");
-      console.error("Error deleting file:", err); // Optional: Log the error
+      // If an fileerror occurs, set the fileerror state
+      setfileerror(err.response?.data?.message || "Failed to delete the file.");
+      console.fileerror("fileerror deleting file:", err); // Optional: Log the fileerror
 
     } finally {
-      setLoading(false); // Stop loading once the process is complete
+      setfileLoading(false); // Stop fileLoading once the process is complete
     }
   };
 
-  return { deleteFile, loading, error, success };
+  return { deleteFile, fileLoading, fileerror, success };
 };
 
 export default useFile;

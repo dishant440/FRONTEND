@@ -4,6 +4,8 @@ import axios from "axios";
 import { Loading, File, Folder, Error } from "./Index";
 import EditFolder from "./EditFolder";
 import { useHooks } from "../hooks";
+import useFile from "../hooks/useFile";
+
 
 const convertToIST = (date) => {
   // Create a new Date object in UTC
@@ -25,8 +27,9 @@ const FolderList = ({ setParentFolderId,refreshKey }) => {
   const [showEditForm,setShowFolderForm] = useState(false);
   const {deleteFolder} = useHooks();
   const [folders, setFolders] = useState([]); // State to hold folders data
-  // Fetch content for the current folder (or root if no folderId)
+  const { deleteFile,fileLoading,fileerror, success } = useFile();
   
+
   useEffect(() => {
     fetchContent(folderId);
   }, [folderId,refreshKey,setFolders]);
@@ -35,6 +38,12 @@ const FolderList = ({ setParentFolderId,refreshKey }) => {
     setEditingFolder({ folderId, folderName });
     setShowFolderForm(true)
   };
+
+  const handleDelete = (fileId) => {
+    deleteFile(fileId);
+  };
+
+
 
   const closeEditForm = () => {
     setEditingFolder(null);
@@ -110,7 +119,7 @@ const FolderList = ({ setParentFolderId,refreshKey }) => {
 
           {/* Render Files */}
           {currentContent.Files?.map((file) => (
-            <File key={file._id} fileName={file.fileName} dateOfCreation={file.dateOfCreation} />
+            <File key={file._id} fileName={file.fileName} dateOfCreation={file.dateOfCreation}  onClick={() => deleteFile(file._id)} />
           ))}
         </>
       )}
