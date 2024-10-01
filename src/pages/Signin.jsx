@@ -79,9 +79,11 @@ const Signin = () => {
             <Input
                 Label="EMAIL"
                 Placeholder="Enter Email"
-                name="email"
+                type="search"
+                name="username"
                 Value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                autoComplete="off"
                 />
                 </div>
             <div>
