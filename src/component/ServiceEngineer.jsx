@@ -77,7 +77,7 @@ const ServiceEngineer = memo(({ engineer }) => {
           <span className="font-bold ml-32">{email}</span>
         </div>
         <div className="right-side flex flex-row items-center justify-end" style={{ width: "30%" }}>
-          <Button value="EDIT" classname="mr-4" />
+          
           <Button value="DELETE" classname="mr-2" />
         </div>
       </div>
