@@ -28,6 +28,32 @@ export const useServiceEngineer = () => {
       }
    
   }
+  const deleteServiceEngineer = async (id) => {
+   
+    const toastId = toast.loading('Deleting .....')
+    try {
+      const response = await axios.delete(`/api/deleteServiceEngineer/${id}`, {
+        headers:{
+          Authorization:`Bearer ${localStorage.getItem("token")}`
+        }
+      });
+      toast.update(toastId,{
+        render:"Deleted successfully",
+        type:"success",
+        isLoading:false,
+        autoClose:2000,
+      })  
+      
+    } catch (err) {
+      toast.update(toastId,{
+        render:"Error Deleting",
+        type:"error",
+        isLoading:false,
+        autoClose:2000,
+      })
+    } 
+  };
+
 
   const addServiceEngineer = async (engineerData) => {
     setLoading(true);
@@ -59,6 +85,7 @@ export const useServiceEngineer = () => {
   return {
     getServiceEngineer,
     addServiceEngineer,
+    deleteServiceEngineer,
     loading,
     error,
   };
