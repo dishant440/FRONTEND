@@ -183,11 +183,7 @@ const AddNewDispenser = () => {
     await createDispenser(dispenserData); 
 
   
-    // // Reset form
-    // setduNumber("");
-    // setModelNo("");
-    // setDisplayNumber(0);
-    // setduDisplay([]);
+
   };
 
   return (
@@ -200,6 +196,7 @@ const AddNewDispenser = () => {
         <label className="block text-sm font-bold ">DU Number:</label>
         <input
           type="text"
+          placeholder="ENTER DU NUMBER"
           value={duNumber}
           onChange={(e) => setduNumber(e.target.value)}
           className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500  text-black"
@@ -212,6 +209,7 @@ const AddNewDispenser = () => {
         <label className="block text-sm font-bold ">Model:</label>
         <input
           type="text"
+          placeholder="ENTER MODEL (eg MODEL-1234)"
           value={model}
           onChange={(e) => setModelNo(e.target.value)}
           className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500  text-black"
@@ -223,6 +221,7 @@ const AddNewDispenser = () => {
         <label className="block text-sm font-bold ">Tender Id:</label>
         <input
           type="text"
+          placeholder="ENTER TENDER ID"
           value={tenderId}
           onChange={(e) => setTenderId(e.target.value)}
           className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500  text-black"
@@ -235,6 +234,7 @@ const AddNewDispenser = () => {
         <label className="block text-sm font-bold ">Number of Displays:</label>
         <input
           type="number"
+          placeholder="ENTER NO OF DISPLAY IN DU"
           value={displayNumber}
           onChange={(e) => setDisplayNumber(Number(e.target.value))}
           min={1}
