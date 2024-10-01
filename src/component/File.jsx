@@ -45,7 +45,7 @@ const File = memo((props) => {
             <div className="right-side flex flex-row items-center justify-center gap-8">
                 <span className="font-bold mr-14">{formattedTime+" IST"}</span>
                 <span className="font-bold mr-2">{formattedDate}</span>
-                <span><Button value="EDIT" classname="mb-2" /></span>
+                <span><Button onClick={onClick} value="EDIT" classname="mb-2" /></span>
                 <span><Button value="DELETE" classname="mb-2" /></span>
             </div>
         </div>
