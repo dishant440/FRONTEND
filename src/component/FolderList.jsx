@@ -79,7 +79,7 @@ const FolderList = ({ setParentFolderId, refreshKey }) => {
     <div className="p-10 flex flex-col gap-4 overflow-y-auto max-h-[70vh] border-t-2 mt-5 "> {/* Add max-height */}
       {currentContent?.Folders?.length === 0 && currentContent?.Files?.length === 0 ? (
         <div className="mr-28">
-          <div className="flex justify-center text-2xl mt-10 mr-5 z-10">
+          <div className="flex justify-center text-2xl mt-10 mr-5 z-5">
             <Error message="Empty" />
           </div>
         </div>

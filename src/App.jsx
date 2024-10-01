@@ -7,6 +7,9 @@ import ProtectedRoute from "./component/ProtectedRoute";
 import { Navigate } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"
+import UpdatePasswordForm from "./component/credentials/UpdatePasswordForm";
+import RequestResetForm from "./component/credentials/RequestResetForm"
+import ResetPasswordForm from "./component/credentials/ResetPasswordForm"
 
 function App() {
 
@@ -19,6 +22,9 @@ function App() {
           <Route path="/admin" element={<ProtectedRoute><Dashboard/></ProtectedRoute>}/>
           <Route path="/content/:folderId" element={<ProtectedRoute><Dashboard/></ProtectedRoute>}/>
           <Route path="/signin" element={<Signin/>}/>
+          <Route path="/update-password" element={<UpdatePasswordForm/>}/>
+          <Route path="/sendResetLink" element={<RequestResetForm/>}/>
+          <Route path="/verify-otp" element={<ResetPasswordForm/>}/>
         </Routes>
       </BrowserRouter>
    </AuthProvider>
