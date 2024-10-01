@@ -39,8 +39,10 @@ const FolderList = ({ setParentFolderId,refreshKey }) => {
     setShowFolderForm(true)
   };
 
-  const handleDelete = (fileId) => {
-    deleteFile(fileId);
+  const handleDelete =async (fileId) => {
+   
+    await deleteFile(fileId);
+       
   };
 
 
@@ -119,7 +121,7 @@ const FolderList = ({ setParentFolderId,refreshKey }) => {
 
           {/* Render Files */}
           {currentContent.Files?.map((file) => (
-            <File key={file._id} fileName={file.fileName} dateOfCreation={file.dateOfCreation}  onClick={() => deleteFile(file._id)} />
+            <File key={file._id} fileName={file.fileName} dateOfCreation={file.dateOfCreation}  onClick={() => handleDelete(file._id)} />
           ))}
         </>
       )}
