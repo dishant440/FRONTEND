@@ -28,7 +28,7 @@ const useDUMap = () => {
           render: "DUMap deleted successfully!",
           type: "success",
           isLoading: false,
-          autoClose: 3000,
+          autoClose: 1500,
         });
       }
     } catch (err) {
@@ -37,7 +37,7 @@ const useDUMap = () => {
         render: `Error: ${err.response?.data?.message || "Something went wrong"}`,
         type: "error",
         isLoading: false,
-        autoClose: 3000,
+        autoClose: 1500,
       });
     } finally {
       setIsLoading(false);

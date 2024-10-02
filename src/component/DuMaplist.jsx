@@ -154,9 +154,9 @@ const DUMapList = () => {
       <h2 className="text-3xl font-bold mb-6 text-center">DU MAP DETAILS</h2>
       <div className="flex flex-row justify-between items-center bg-gray-100 p-4 pl-24 border-b border-gray-300 bg-gray-800 text-amber-400 font-bold hover:shadow-md">
         <div className="flex min-w-[50px] ">NAME</div>
-        <div className="flex w-[100px] bg-red-400 ">DU NUMBER</div>
-        <div className="flex bg-red-800 ml-5 ">MODEL</div>
-        <div className="flex bg-red-400">DISPLAY NO</div>
+        <div className="flex w-[100px] ">DU NUMBER</div>
+        <div className="flex ml-5 ">MODEL</div>
+        <div className="flex ">DISPLAY NO</div>
         <div className="flex min-w-[100px]"></div>
       </div>
       <div className="flex flex-col gap-4">
