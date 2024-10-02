@@ -371,10 +371,10 @@ const ServiceEngineerForm = () => {
     type="text"
     value={selectedEngineer}
     onChange={handleEngineerInputChange}
-    className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+    className="mt-1 p-2 border border-gray-300 rounded-md text-black w-full"
   />
   {engineers.length > 0 && (
-    <ul className="border border-gray-300 bg-gray-200  rounded-md mt-1 max-h-40 overflow-y-auto z-10 absolute w-full"> {/* Adjusted position */}
+    <ul className="border border-gray-300 bg-gray-200 text-black  rounded-md mt-1 max-h-40 overflow-y-auto z-10 absolute w-full"> {/* Adjusted position */}
       {engineers.map((engineer, index) => (
         <li
           key={index}
@@ -382,7 +382,7 @@ const ServiceEngineerForm = () => {
             setSelectedEngineer(engineer.name);
             setEngineers([]); // Clear engineers suggestions after selection
           }}
-          className="p-2 hover:bg-gray-100 cursor-pointer text-white"
+          className="p-2 hover:bg-gray-100 cursor-pointer text-black"
         >
           {engineer.name}
         </li>
