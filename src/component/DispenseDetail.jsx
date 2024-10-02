@@ -24,6 +24,8 @@ const DispenserDetails = memo(() => {
   }, []);
 
   return (
+   <>
+   <div className='text-black text-3xl font-bold flex mx-auto justify-center m-10'>DISPENSER DETAILS</div>
     <div className="dispenser-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-8 ">
       {dispenserData.length === 0 ? (
         <div className="flex"><Error message="NO DATA AVAILABLE" /></div>
@@ -43,6 +45,7 @@ const DispenserDetails = memo(() => {
         ))
       )}
     </div>
+   </>
   );
 });
 
