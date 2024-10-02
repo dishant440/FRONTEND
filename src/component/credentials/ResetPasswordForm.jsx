@@ -1,58 +1,36 @@
-// import { useState } from 'react';
-// import { useParams } from 'react-router-dom';
-// import axios from 'axios';
-
-// const RequestResetPassword = () => {
-//   const { token } = useParams();
-//   const [password, setPassword] = useState('');
-
-//   const handleResetPassword = async () => {
-//     try {
-//       await axios.post(`/api/reset/${token}`, { password });
-//       alert('Password has been reset');
-//     } catch (error) {
-//       console.error(error);
-//       alert('Failed to reset password');
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <input
-//         type="password"
-//         placeholder="Enter new password"
-//         value={password}
-//         onChange={(e) => setPassword(e.target.value)}
-//       />
-//       <button onClick={handleResetPassword}>Reset Password</button>
-//     </div>
-//   );
-// };
-
-// export default RequestResetPassword;
-
-
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const RequestResetPassword = () => {
   const [otp, setOtp] = useState('');
   const [email, setEmail] = useState('');
   const [newPassword, setnewPassword] = useState('');
   const navigate = useNavigate()
-   
+
+  const toastId = toast.loading("Verifying Please Wait ...")
   const handleResetPassword = async () => {
     try {
       await axios.post('http://192.168.29.65:7000/api/verify-otp', { otp, email, newPassword },
         { headers: { 'Content-Type': 'application/json' } }
-      );
-      
-      alert('newPassword has been reset');
+      );   
+      toast.update(toastId,{
+        render:"Password was reset ...",
+        type:"success",
+        isLoading:false,
+        autoClose:3000
+      })
       navigate("/signin")
     } catch (error) {
-      console.error(error);
-      alert('Failed to reset newPassword');
+      toast.update(toastId,{
+        render:"Invalid OTP or Email",
+        type:"error",
+        isLoading:false,
+        autoClose:2000,
+      })
     }
   };
 
@@ -92,6 +70,7 @@ const RequestResetPassword = () => {
           Reset Password
         </button>
       </div>
+      <ToastContainer position='top-center'/>
     </div>
   );
 };

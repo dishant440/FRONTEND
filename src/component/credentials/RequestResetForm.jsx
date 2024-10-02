@@ -45,6 +45,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { ToastContainer,toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import "react-toastify/dist/ReactToastify.css";
 
 const RequestResetForm = () => {
   const [email, setEmail] = useState('');
@@ -53,14 +54,14 @@ const RequestResetForm = () => {
   const navigate = useNavigate()
 
   const handleRequestReset = async () => {
-    const toastId = toast.loading("Processing Request")
+    const toastId = toast.loading("Sending Otp")
     try {
       await axios.post('http://192.168.29.65:7000/api/requestPasswordReset', { email });
       toast.update(toastId,{
         render:`Reset Link sent to ${email}`,
         type:'success',
         isLoading:false,
-        autoClose:3000}
+        autoClose:1000}
       );
       navigate("/verify-otp")
     } catch (error) {
