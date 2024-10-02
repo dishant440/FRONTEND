@@ -9,13 +9,14 @@ import AddNewDispenser from "../component/AddNewDispenser";
 import DynamicForm2 from "../component/DynamicForm2";
 import DUMaplist from "../component/DuMaplist"
 import DispenserDetails from "../component/DispenseDetail";
+import SvgImage from "../component/Image";
 
 
 const Dashboard = () => {
   const [showFolderForm, setShowFolderForm] = useState(false);
   const [parentFolderId, setParentFolderId] = useState("");
   const [folders, setFolders] = useState([]);
-  const [activeView, setActiveView] = useState("home"); // Single state to control view
+  const [activeView, setActiveView] = useState("image"); // Single state to control view
   const [showfileUpload,setshowFileUpload] = useState(false);
 
   const fetchFolderData = useCallback(async (folderId) => {
@@ -95,6 +96,10 @@ const Dashboard = () => {
               />
             </div>
           )}
+          {activeView === "image" && (
+            <SvgImage/>
+          )
+          }
 
           {activeView === "addServiceEngineer" && (
             <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
