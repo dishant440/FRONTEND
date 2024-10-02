@@ -36,10 +36,12 @@ const DUInfo = memo(({ duMap }) => {
         <span className="font-bold">{name}</span>
       </div>
       <div className="font-bold">{duNumber}</div>
-      <div className="font-bold">{model}</div>
+      <div className="font-bold ml-4">{model}</div>
       {/* <div className="flex items-center gap-2"> */}
       
         <span className="font-bold mr-10">{displayNumber}</span>
+      <button className="bg-black p-2 text-white rounded">DELETE</button>
+
       {/* </div> */}
     </div>
   );
