@@ -6,9 +6,9 @@ import UploadFileForm from "./UploadFileForm"; // Import UploadFileForm
 const MainComponent = ({ setParentFolderId }) => {
   const [refreshKey, setRefreshKey] = useState(0);
   const [parentFolderNames, setParentFolderNames] = useState([]); 
-  const [showUploadForm, setShowUploadForm] = useState(false); 
+  // const [showUploadForm, setShowUploadForm] = useState(false); 
 
-  console.log("MAIN COMPONENT RE RENDER");
+
 
   // Function to refresh the FolderList
   const refreshFolders = () => {
@@ -24,8 +24,6 @@ const MainComponent = ({ setParentFolderId }) => {
       setParentFolderNames((prev) => [...prev, parentFolderName]);
     }
   };
-  console.log(parentFolderNames);
-  
 
   return (
     <div className="flex flex-col">
@@ -44,12 +42,12 @@ const MainComponent = ({ setParentFolderId }) => {
         refreshKey={refreshKey} 
       />
     
-      {showUploadForm && (
+      {/* {showUploadForm && (
         <UploadFileForm 
           onClose={() => setShowUploadForm(false)} 
           parentFolderId={setParentFolderId} 
         />
-      )}
+      )} */}
     </div>
   );
 };

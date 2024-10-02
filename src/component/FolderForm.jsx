@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHooks } from "../hooks";
 import { toast } from "react-toastify";
 const FolderForm = ({ onClose, parentFolderId, onFolderCreated }) => {
