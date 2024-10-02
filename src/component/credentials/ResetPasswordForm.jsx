@@ -34,16 +34,22 @@
 
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const RequestResetPassword = () => {
   const [otp, setOtp] = useState('');
   const [email, setEmail] = useState('');
   const [newPassword, setnewPassword] = useState('');
-
+  const navigate = useNavigate()
+   
   const handleResetPassword = async () => {
     try {
-      await axios.post('http://192.168.29.65:7000/api/verify-otp', { otp, email, newPassword });
+      await axios.post('http://192.168.29.65:7000/api/verify-otp', { otp, email, newPassword },
+        { headers: { 'Content-Type': 'application/json' } }
+      );
+      
       alert('newPassword has been reset');
+      navigate("/signin")
     } catch (error) {
       console.error(error);
       alert('Failed to reset newPassword');
