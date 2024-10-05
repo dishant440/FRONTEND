@@ -2,31 +2,17 @@ import React from "react";
 import Folder from "./Folder";
 import File from "./File";
 
-import { useHooks } from '../hooks/index'; // Import useHooks
 import { useFile } from '../hooks/useFile'; // Import useFile
 
 const FolderList = ({ folders, onFolderClick, files, fetchFolderData, folderId }) => {
-    const { deleteFolder } = useHooks(); // Access deleteFolder from useHooks
+    const isEmpty = folders.length === 0 && files.length === 0;
     const { deleteFile } = useFile(); // Access deleteFile from useFile
 
-    // Handle deleting a folder
-    // const handleDeleteFolder = async (folderId) => {
-    //     console.log(folderId);
-    //     console.log("deleteFolder called");
-        
-    //     try {
-    //         await deleteFolder(folderId); 
-    //         fetchFolderData();  
-    //     } catch (error) {
-    //         console.error("Error deleting folder:", error.message);
-    //     }
-    // };
 
-    // Handle deleting a file
     const handleDeleteFile = async (fileId) => {
         try {
-            await deleteFile(fileId); // Use deleteFile from the hook
-            fetchFolderData(folderId);  // Refetch data after deletion
+            await deleteFile(fileId); 
+            fetchFolderData(folderId);  
         } catch (error) {
             console.error("Error deleting file:", error.message);
         }
@@ -60,6 +46,9 @@ const FolderList = ({ folders, onFolderClick, files, fetchFolderData, folderId }
                     />
                 </div>
             ))}
+            {folders.length === 0 && files.length===0 && (
+                <div className="mx-auto mt-24 text-3xl font-bold text-red-400 p-4 bg-gray-200 rounded">EMPTY</div>
+            )}
         </div>
     );
 };

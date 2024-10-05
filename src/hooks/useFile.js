@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 export const useFile = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-
   // Function to delete a file by ID
   const deleteFile = async (fileId) => {
    
