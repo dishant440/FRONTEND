@@ -19,7 +19,7 @@ export const useFile = () => {
         },
       });
       toast.update(toastId,{
-        render:"Folder deleted successfully",
+        render:"File deleted successfully",
         type:"success",
         isLoading:false,
         autoClose:2000,

@@ -78,7 +78,7 @@ export const useHooks = () => {
         },
       });
       toast.update(toastId, {
-        render: "Folder created Refresh Page",
+        render: "Folder created ",
         type: "success",
         isLoading: false,
         autoClose: 2000,
@@ -108,7 +108,7 @@ export const useHooks = () => {
           folderId
         });
         toast.update(toastId, {
-          render: "Folder edited successfully Refresh Page",
+          render: "Folder edited successfully ",
           type: "success",
           isLoading: false,
           autoClose: 2000,
