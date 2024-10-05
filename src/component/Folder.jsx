@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Folder = ({ folder, onEdit, onDelete, dateOfCreation }) => {
+const Folder = ({ folder, onEdit, onDelete, dateOfCreation, onDelete }) => {
   return (
     <div className="flex items-center justify-between p-4 py-4">
  
@@ -22,7 +22,7 @@ const Folder = ({ folder, onEdit, onDelete, dateOfCreation }) => {
               EDIT
           </button>
           <button
-            onClick={() => onDelete(folder._id)}
+            onClick={onDelete}  // Trigger the delete function
             className="bg-red-500 text-white py-1 px-3 font-bold rounded hover:bg-red-600"
           >
             DELETE
