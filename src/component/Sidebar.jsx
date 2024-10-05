@@ -14,18 +14,7 @@ const Sidebar = React.memo(({ onSelect }) => {
           >
             HOME
           </li>
-          <li
-            className="text-md font-serif font-bold group bg-amber-500 text-white hover:bg-amber-400 p-2 rounded-md cursor-pointer flex justify-center items-center"
-            onClick={() => onSelect("createFolder")}
-          >
-            CREATE FOLDER
-          </li>
-          <li
-            className="text-md font-serif font-bold group bg-amber-500 text-white hover:bg-amber-400 p-2 rounded-md cursor-pointer flex justify-center"
-            onClick={() => onSelect("uploadFile")}
-          >
-            UPLOAD FILE
-          </li>
+         
           <li
             className="text-md font-serif font-bold group bg-amber-500 text-white hover:bg-amber-400 p-2 rounded-md cursor-pointer flex items-center"
             onClick={() => onSelect("addServiceEngineer")}

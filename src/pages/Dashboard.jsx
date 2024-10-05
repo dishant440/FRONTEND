@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import {  FolderComponent, Navbar, Sidebar } from "../component/Index";
 
 import ServiceEngineerForm from "../component/ServiceEngineerForm";
-import axios from "axios";
+
 import ServiceEngineerList from "../component/ServiceEngineerList";
 import AddNewDispenser from "../component/AddNewDispenser";
 import DynamicForm2 from "../component/DynamicForm2";
@@ -12,23 +12,13 @@ import SvgImage from "../component/Image";
 
 
 const Dashboard = () => {
-  const [showFolderForm, setShowFolderForm] = useState(false);
-  const [parentFolderId, setParentFolderId] = useState("");
-  const [folders, setFolders] = useState([]);
-  const [activeView, setActiveView] = useState("image"); // Single state to control view
-  const [showfileUpload,setshowFileUpload] = useState(false);
+const [activeView, setActiveView] = useState("image"); // Single state to control view
 
 
 
-  const handleSelection = useCallback((action, folderId) => {
-    if (action === "createFolder") {
-      setParentFolderId(folderId);
-      setShowFolderForm(true);
-    } else if (action === "uploadFile") {
-      // setActiveView("uploadFile"); // Change view
-      setshowFileUpload(true)
 
-    } else if (action === "addServiceEngineer") {
+  const handleSelection = useCallback((action) => {
+    if (action === "addServiceEngineer") {
       setActiveView("addServiceEngineer"); // Change view
     } else if (action === "showServiceEngineer") {
       setActiveView("serviceEngineerList"); // Change view
@@ -55,7 +45,7 @@ const Dashboard = () => {
       <Navbar />
       <div className="flex flex-1">
         <div className="flex-none">
-          <Sidebar onSelect={(action) => handleSelection(action, parentFolderId)} />
+          <Sidebar onSelect={(action) => handleSelection(action)} />
         </div>
         <div className="flex-1 bg-gray-100">
           {/* {showFolderForm && (

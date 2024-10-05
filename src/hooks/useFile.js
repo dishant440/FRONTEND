@@ -3,8 +3,9 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 // Custom hook for file operations
-const useFile = () => {
-
+export const useFile = () => {
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   // Function to delete a file by ID
   const deleteFile = async (fileId) => {
@@ -29,7 +30,7 @@ const useFile = () => {
 
     } catch (err) {
 
-
+      set
       toast.update(toastId, {
         render: "Error deleting file",
         type: "error",
@@ -43,4 +44,4 @@ const useFile = () => {
   return { deleteFile };
 };
 
-export default useFile;
+export default  useFile;  // Export the custom hook
