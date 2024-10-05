@@ -1,54 +1,37 @@
+import React from 'react';
 
-import React, { memo, useState } from "react";
-import Button from "./Button";
+const Folder = ({ folder, onEdit, onDelete, dateOfCreation }) => {
+  return (
+    <div className="flex items-center justify-between p-4 py-4">
+ 
+      <div className="flex items-center flex-grow">
+        <img src={`/folder.png`} alt="Folder Icon" className="w-8 h-8 mr-2" />
+        <span className="font-semibold text-lg mx-4">{folder}</span>
+      </div>
 
-
-// Function to format the date
-const formatDate = (isoDate) => {
-    const dateObj = new Date(isoDate);
-    const day = dateObj.getDate();
-    const year = dateObj.getFullYear();
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    const month = monthNames[dateObj.getMonth()];
-
-    return `${day} ${month} ${year}`;
-};
-
-const formatTime = (isoDate) => {
-    const dateObj = new Date(isoDate);
-    let hours = dateObj.getUTCHours();
-    const minutes = dateObj.getUTCMinutes().toString().padStart(2, "0");
-    const ampm = hours >= 12 ? "PM" : "AM";
-    hours = hours % 12 || 12; // Convert to 12-hour format
-    return `${hours}:${minutes} ${ampm}`;
-};
-
-const Folder = memo(({ folderName, dateOfCreation,  onClick, onClickEdit, onClickDelete  }) => {
-    
-  console.log("FOLDER RE RENDERS");
   
-
-    const formattedTime = formatTime(dateOfCreation);
-    const formattedDate = formatDate(dateOfCreation);
-
-    return (
-        <div className="folder-div hover:shadow-md border-amber-400 flex flex-row justify-between items-center bg-gray-200 p-4">
-            <div className="left-side flex flex-row items-center gap-2" onClick={onClick}>
-                <img src="/folder.png" alt="Folder Icon" />
-                <span className="font-serif pointer">{folderName}</span>
-            </div>
-            <div className="right-side flex flex-row items-center justify-center gap-8">
-                <span className="font-bold mr-14">{formattedTime + " IST"}</span>
-                <span className="font-bold mr-2">{formattedDate}</span>
-                <span>
-                    <Button value="EDIT" classname="mb-2" onClick={onClickEdit} />
-                </span>
-                <span>
-                    <Button value="DELETE" classname="mb-2" onClick={onClickDelete}/>
-                </span>
-            </div>
+      <div className="flex flex-row items-end gap-4">
+        <div className="text-md mx-8 font-bold mb-1">
+          {new Date(dateOfCreation).toLocaleDateString()}
         </div>
-    );
-});
+        <div className="flex gap-2">
+          <button
+            onClick={() => onEdit(folder._id)}
+            className="bg-amber-500 text-white py-1 px-3 mx-4 font-bold rounded hover:bg-amber-400"
+          >
+              EDIT
+          </button>
+          <button
+            onClick={() => onDelete(folder._id)}
+            className="bg-red-500 text-white py-1 px-3 font-bold rounded hover:bg-red-600"
+          >
+            DELETE
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default React.memo(Folder);
+export default Folder;
+

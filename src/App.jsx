@@ -11,11 +11,16 @@ import UpdatePasswordForm from "./component/credentials/UpdatePasswordForm";
 import RequestResetForm from "./component/credentials/RequestResetForm"
 import ResetPasswordForm from "./component/credentials/ResetPasswordForm"
 
+import { Provider } from 'react-redux';
+import { store } from './store';
+
+
 function App() {
 
   return (
    <>
-    <AuthProvider>
+   <Provider store={store}>
+   <AuthProvider>
       <BrowserRouter>
         <Routes>
         <Route path="/" element={<Navigate to="/admin" />} />
@@ -28,6 +33,7 @@ function App() {
         </Routes>
       </BrowserRouter>
    </AuthProvider>
+   </Provider>
    <ToastContainer position="top-center"/>
    </>
   )
@@ -35,3 +41,4 @@ function App() {
 
 
 export default App;
+

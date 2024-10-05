@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { MainComponent, Navbar, Sidebar } from "../component/Index";
-import FolderForm from "../component/FolderForm";
-import UploadFileForm from "../component/UploadFileForm";
+import {  FolderComponent, Navbar, Sidebar } from "../component/Index";
+
 import ServiceEngineerForm from "../component/ServiceEngineerForm";
 import axios from "axios";
 import ServiceEngineerList from "../component/ServiceEngineerList";
@@ -19,22 +18,7 @@ const Dashboard = () => {
   const [activeView, setActiveView] = useState("image"); // Single state to control view
   const [showfileUpload,setshowFileUpload] = useState(false);
 
-  const fetchFolderData = useCallback(async (folderId) => {
-    try {
-      const response = await axios.get(
-        folderId ? `http://192.168.29.65:7000/api/content/${folderId}` : `http://192.168.29.65:7000/api/allContent`
-      );
-      setFolders(response.data);
-    } catch (error) {
-      console.error("Error fetching folder data:", error);
-    }
-  }, []);
 
-  // Function to refresh folder list
-  
-  const refreshFolderList = useCallback(() => {
-    fetchFolderData(parentFolderId);
-  }, [parentFolderId, fetchFolderData]);
 
   const handleSelection = useCallback((action, folderId) => {
     if (action === "createFolder") {
@@ -65,9 +49,6 @@ const Dashboard = () => {
     }
   }, []);
 
-  useEffect(() => {
-    fetchFolderData(null);
-  }, [fetchFolderData]);
 
   return (
     <div className="flex flex-col h-screen">
@@ -77,7 +58,7 @@ const Dashboard = () => {
           <Sidebar onSelect={(action) => handleSelection(action, parentFolderId)} />
         </div>
         <div className="flex-1 bg-gray-100">
-          {showFolderForm && (
+          {/* {showFolderForm && (
             <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
             <FolderForm
               parentFolderId={parentFolderId}
@@ -85,17 +66,17 @@ const Dashboard = () => {
               onFolderCreated={refreshFolderList}
             />
           </div>
-          )}
+          )} */}
 
           {/* Render components based on active view */}
-          {showfileUpload&& (
+          {/* {showfileUpload&& (
               <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
               <UploadFileForm
                 onClose={() => setshowFileUpload(false)}
                 parentFolderId={parentFolderId}
               />
             </div>
-          )}
+          )} */}
           {activeView === "image" && (
             <SvgImage/>
           )
@@ -116,7 +97,7 @@ const Dashboard = () => {
           {activeView === "duMap" && (<DynamicForm2/>)}
 
           {activeView === "home" && (
-            <MainComponent setParentFolderId={setParentFolderId} />
+            <FolderComponent />
           )}
           {activeView === "showDUMap" && (<DUMaplist/>)}
           {activeView === "dispenserDetails" && <DispenserDetails />}

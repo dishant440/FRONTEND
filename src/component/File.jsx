@@ -63,7 +63,6 @@
 
 
 import React, { memo } from "react";
-import Button from "./Button";
 
 // Function to format the date
 const formatDate = (isoDate) => {
@@ -89,32 +88,39 @@ const formatTime = (isoDate) => {
     return `${hours}:${minutes} ${ampm}`;
 };
 
-const File = memo(({ fileName, dateOfCreation, onClick }) => {
+const File = memo(({ fileName, dateOfCreation , fileId}) => {
     const formattedTime = formatTime(dateOfCreation);
     const formattedDate = formatDate(dateOfCreation);
 
-   
-    const handleDeleteClick = () => {
-       
-        if (onClick) {
-            onClick(); 
-        }
-    };
-
     return (
-        <div className="folder-div hover:shadow-md border-amber-400 flex flex-row justify-between items-center bg-gray-200 p-4">
-            <div className="left-side flex flex-row items-center gap-2"> 
-                <img src="/fileIcon.png" alt="File" />
-                <span className="font-serif">{fileName}</span>
-            </div>
-            <div className="right-side flex flex-row items-center justify-center gap-8">
-                <span className="font-bold mr-14">{formattedTime + " IST"}</span>
-                <span className="font-bold mr-2">{formattedDate}</span>
-                <span>
-                    <Button onClick={handleDeleteClick} value="DELETE" classname="mb-2" />
-                </span>
-            </div>
+        <div className="flex items-center justify-between bg-black p-4 py-4">
+ 
+        <div className="flex items-center flex-grow">
+          <img src={`/fileIcon.png`} alt="Folder Icon" className="w-8 h-8 mr-2" />
+          <span className="font-semibold text-lg mx-4">{fileName}</span>
         </div>
+  
+    
+        <div className="flex flex-row items-end gap-4">
+          <div className="text-md mx-8 font-bold mb-1">
+            {new Date(dateOfCreation).toLocaleDateString()}
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={() => onEdit(fileId)}
+              className="bg-amber-500 text-white py-1 px-3 mx-4 font-bold rounded hover:bg-amber-400"
+            >
+                EDIT
+            </button>
+            <button
+              onClick={() => onDelete(fileId)}
+              className="bg-red-500 text-white py-1 px-3 font-bold rounded hover:bg-red-600"
+            >
+              DELETE
+            </button>
+          </div>
+        </div>
+      </div>
     );
 });
 
